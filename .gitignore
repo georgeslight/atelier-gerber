@@ -78,4 +78,4 @@ coverage.html
 *_templ.go
 
 # Tailwind output
-/static/css/tailwind.css
+/static/css/styles.css

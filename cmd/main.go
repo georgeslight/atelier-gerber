@@ -1,9 +1,9 @@
 package main
 
 import (
-	"art/views/layouts"
 	"fmt"
 	"github.com/a-h/templ"
+	"kristin-gerber/views/layouts"
 	"net/http"
 )
 

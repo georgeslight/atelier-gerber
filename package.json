@@ -1,0 +1,14 @@
+{
+  "name": "kristin-gerber",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "@types/bun": "latest",
+    "tailwindcss": "^4.1.11"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

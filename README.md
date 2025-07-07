@@ -1,4 +1,4 @@
-# art
+# kristin-gerber
 
 To install dependencies:
 

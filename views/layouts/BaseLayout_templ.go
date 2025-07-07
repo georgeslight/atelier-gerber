@@ -9,7 +9,7 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import (
-	"art/views/components"
+	"kristin-gerber/views/components"
 )
 
 func BaseLayout() templ.Component {
@@ -41,7 +41,7 @@ func BaseLayout() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<h1 class=\"text-3xl font-bold text-[#007D9C]\">Hello World From ART</h1></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<h1 class=\"text-3xl font-bold text-[#007D9C]\">Hello World</h1></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
