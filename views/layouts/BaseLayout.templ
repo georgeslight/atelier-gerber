@@ -1,0 +1,24 @@
+package layouts
+
+import (
+    "art/views/components"
+)
+
+templ BaseLayout() {
+	<!DOCTYPE html>
+	<html lang="de">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>Document</title>
+			// TailwindCSS
+			<link rel="stylesheet" href="/static/css/styles.css"/>
+			// AlpineJS
+			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		</head>
+		<body class="p-10">
+		    @components.Navbar()
+			<h1 class="text-3xl font-bold text-[#007D9C]">Hello World From ART</h1>
+		</body>
+	</html>
+}
