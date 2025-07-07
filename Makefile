@@ -69,6 +69,38 @@ func main() {\n\
 }\n\
 '
 
+AIR_TOML := '\
+root = "."\n\
+tmp_dir = "build"\n\
+\n\
+[build]\n\
+\tbin = "./build/main"\n\
+\tcmd = "templ generate && go build -o ./build/main cmd/main.go"\n\
+\tdelay = 1000\n\
+\texclude_dir = ["static", "node_modules", "build"]\n\
+\texclude_regex = [".*_templ.go"]\n\
+\texclude_unchanged = false\n\
+\tfollow_symlink = false\n\
+\tinclude_ext = ["go", "tpl", "tmpl", "templ", "html"]\n\
+\tkill_delay = "0s"\n\
+\tlog = "build-errors.log"\n\
+\tsend_interrupt = false\n\
+\tstop_on_error = true\n\
+\n\
+[color]\n\
+\tbuild = "yellow"\n\
+\tmain = "magenta"\n\
+\trunner = "green"\n\
+\twatcher = "cyan"\n\
+\n\
+[log]\n\
+\ttime = false\n\
+\n\
+[misc]\n\
+\tclean_on_exit = true\n\
+'
+
+
 .PHONY: check-deps init create-dirs setup-go setup-tailwind build serve watch clean help templ
 
 init: check-deps create-dirs setup-go setup-tailwind
@@ -103,6 +135,7 @@ create-dirs:
 	@templ fmt ./views/layouts/BaseLayout.templ   
 	@echo "// Navigation component" > views/components/Navbar.templ
 	@echo "// Home page component" > views/pages/HomePage.templ
+	@printf "%b" $(AIR_TOML) > .air.toml
 	@printf "$(CHECK) Project structure created\n"
 
 setup-go:
@@ -138,8 +171,21 @@ css:
 	@bunx @tailwindcss/cli -i $(STATIC_DIR)/css/input.css -o $(STATIC_DIR)/css/styles.css --minify
 	@printf "$(CHECK) CSS generated\n"
 
+watch:
+	@printf "\n$(CYAN)Watching for changes$(RESET)\n"
+	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
+	@printf "\n$(CYAN)Rebuilding...$(RESET)\n"
+	@bunx @tailwindcss/cli -i $(STATIC_DIR)/css/input.css -o $(STATIC_DIR)/css/styles.css --watch=always &
+	@air
+
+serve: templ css
+	@printf "\n$(CYAN)Starting server$(RESET)\n"
+	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
+	@$(GO_BIN) run $(MAIN_GO) serve
+
 help:
 	@printf "\n$(CYAN)Available commands$(RESET)\n"
 	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
 	@printf "  make init$(RESET)          $(ARROW) Initialize project\n"
 	@printf "  make build$(RESET)         $(ARROW) Build project\n"
+	@printf "  make watch$(RESET)         $(ARROW) Watch for changes\n"
