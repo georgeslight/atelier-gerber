@@ -52,7 +52,7 @@ templ BaseLayout() {\n\
     </html>\n\
 }'
 
-MAIN_GO := 'package main\n\
+MAIN_GO_FILE := 'package main\n\
 import (\n\
 	"fmt"\n\
 	"net/http"\n\
@@ -92,8 +92,8 @@ create-dirs:
 	@mkdir -p internal/{handler,middleware,model,service,util}
 	@mkdir -p cmd/
 	@mkdir -p $(BUILD_DIR)
-	@printf "%b" $(MAIN_GO) > cmd/main.go
-	@$(GO_BIN) fmt cmd/main.go
+	@printf "%b" $(MAIN_GO_FILE) > $(MAIN_GO)
+	@$(GO_BIN) fmt $(MAIN_GO)
 	@echo "package handler" > internal/handler/handler.go
 	@echo "package middleware" > internal/middleware/middleware.go
 	@echo "package model" > internal/model/model.go
@@ -120,7 +120,26 @@ setup-tailwind:
 	@echo '@import "tailwindcss";' > $(STATIC_DIR)/css/input.css
 	@printf "$(CHECK) Tailwind CSS ready\n"
 
+build: check-deps templ css
+	@printf "\n$(CYAN)Building project$(RESET)\n"
+	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
+	@$(GO_BIN) build -o $(BUILD_DIR) $(MAIN_GO)
+	@printf "$(CHECK) Build complete\n"
+
+templ:
+	@printf "\n$(CYAN)Generating templ files$(RESET)\n"
+	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
+	@$(TEMPL_BIN) generate
+	@printf "$(CHECK) Templ files generated\n"
+
+css:
+	@printf "\n$(CYAN)Generating CSS$(RESET)\n"
+	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
+	@bunx @tailwindcss/cli -i $(STATIC_DIR)/css/input.css -o $(STATIC_DIR)/css/styles.css --minify
+	@printf "$(CHECK) CSS generated\n"
+
 help:
 	@printf "\n$(CYAN)Available commands$(RESET)\n"
 	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
 	@printf "  make init$(RESET)          $(ARROW) Initialize project\n"
+	@printf "  make build$(RESET)         $(ARROW) Build project\n"
