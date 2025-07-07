@@ -143,6 +143,7 @@ setup-go:
 	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
 	@$(GO_BIN) mod init $(PROJECT_NAME) 2>/dev/null || true
 	@$(GO_BIN) mod tidy >/dev/null 2>&1
+	@$(GO_BIN) get -u github.com/a-h/templ
 	@printf "$(CHECK) Go modules ready\n"
 
 setup-tailwind:
@@ -189,3 +190,4 @@ help:
 	@printf "  make init$(RESET)          $(ARROW) Initialize project\n"
 	@printf "  make build$(RESET)         $(ARROW) Build project\n"
 	@printf "  make watch$(RESET)         $(ARROW) Watch for changes\n"
+	@printf "  make serve$(RESET)         $(ARROW) Start server\n"
