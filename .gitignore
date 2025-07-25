@@ -79,3 +79,5 @@ coverage.html
 
 # Tailwind output
 /static/css/styles.css
+
+build

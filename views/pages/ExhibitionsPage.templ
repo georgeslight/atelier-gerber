@@ -1,5 +1,36 @@
 package pages
 
 templ ExhibitionPage() {
-    <h1 class="text-3xl font-bold text-[#007D9C]">Hello World From Exhibition</h1>
+    <h3 class="uppercase mb-8">Individual Exhibitions</h3>
+    <a class="flex flex-col grid grid-cols-1 md:grid md:grid-cols-3 gap-4" href="/exhibitions/b001">
+        <img src="/static/images/b001.jpg" alt="test images" class="w-full md:col-span-2 md:mb-12 md:pr-4" />
+        <div class="mb-12 md:mb-0 md:pl-4">
+            <div class="flex flex-col">
+                <h4>Kristin Gerber</h4>
+                <p>Galerie Métamorphose, Paris</p>
+                <time>1963</time>
+            </div>
+        </div>
+    </a>
+    <a class="flex flex-col grid grid-cols-1 md:grid md:grid-cols-3 gap-4" href="/exhibitions/b002">
+        <img src="/static/images/b002.jpg" alt="test images" class="w-full md:col-span-2 md:mb-12 md:pr-4" />
+        <div class="mb-12 md:mb-0 md:pl-4">
+            <div class="flex flex-col">
+                <h4>International Studio Program</h4>
+                <p>MoMA PS1, Long Island City, New York</p>
+                <time>1978 - 1979</time>
+            </div>
+        </div>
+    </a>
+    <h3 class="uppercase mb-8">Group Exhibitions</h3>
+    <a class="flex flex-col grid grid-cols-1 md:grid md:grid-cols-3 gap-4" href="/exhibitions/b002">
+        <img src="/static/images/b002.jpg" alt="test images" class="w-full md:col-span-2 md:mb-12 md:pr-4" />
+        <div class="mb-12 md:mb-0 md:pl-4">
+            <div class="flex flex-col">
+                <h4>International Studio Program</h4>
+                <p>MoMA PS1, Long Island City, New York</p>
+                <time>1978 - 1979</time>
+            </div>
+        </div>
+    </a>
 }
