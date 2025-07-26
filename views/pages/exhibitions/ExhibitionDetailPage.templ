@@ -1,6 +1,9 @@
 package exhibitions
 
-import "kristin-gerber/internal/model"
+import (
+    "kristin-gerber/internal/model"
+    "strconv"
+)
 
 templ ExhibitionDetailPage(exhibition model.Exhibition) {
     <div>
@@ -8,10 +11,31 @@ templ ExhibitionDetailPage(exhibition model.Exhibition) {
             <h2>{ exhibition.Title }</h2>
             <h2>{ exhibition.Location }</h2>
         </div>
-        <div class="my-8">
-            for _, image := range exhibition.Details.Images {
-                <img src={ image.Src } alt="" />
-            }
+        <div class="my-8" x-data="{ currentIndex: 0 }">
+            <div class="relative inline-block">
+                <!-- Images -->
+                for i, image := range exhibition.Details.Images {
+                    <img src={ image.Src } alt="" x-show={ "currentIndex === " + strconv.Itoa(i) } class="w-full h-auto"/>
+                }
+                <!-- Left Navigation Area - cursor changes to left arrow -->
+                <div class="absolute left-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-left.png),_pointer]"
+                     @click={ "currentIndex = currentIndex > 0 ? currentIndex - 1 : " + strconv.Itoa(len(exhibition.Details.Images) - 1) }>
+                </div>
+                <!-- Right Navigation Area - cursor changes to right arrow -->
+                <div class="absolute right-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-right.png),_pointer]"
+                     @click={ "currentIndex = currentIndex < " + strconv.Itoa(len(exhibition.Details.Images) - 1) + " ? currentIndex + 1 : 0" }>
+                </div>
+            </div>
+                <!-- Dot Navigation -->
+                <div class="flex justify-center mt-4 space-x-2">
+                    for i := range exhibition.Details.Images {
+                        <button
+                            @click={ "currentIndex = " + strconv.Itoa(i) }
+                            class="w-2.5 h-2.5 rounded-full focus:outline-none transition-colors"
+                            :class={ "currentIndex === " + strconv.Itoa(i) + " ? 'bg-gray-700' : 'bg-gray-300'" }
+                        ></button>
+                    }
+                </div>
         </div>
         <div>
             <div class="uppercase tracking-wide">
@@ -24,5 +48,4 @@ templ ExhibitionDetailPage(exhibition model.Exhibition) {
             </div>
         </div>
     </div>
-
 }
