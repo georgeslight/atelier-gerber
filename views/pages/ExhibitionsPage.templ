@@ -3,32 +3,36 @@ package pages
 import "kristin-gerber/internal/model"
 
 templ ExhibitionPage(data model.ExhibitionsData) {
-    <h3 class="uppercase mb-8">Individual Exhibitions</h3>
 
+    <h3 class="uppercase mb-8">Individual Exhibitions</h3>
     for _, individual := range data.Individual {
-        <a class="flex flex-col grid grid-cols-1 md:grid md:grid-cols-3 gap-4" href={ templ.URL(individual.Href) }>
-            <img src={ individual.BaseImage.Src } alt={ individual.BaseImage.Alt } class="w-full md:col-span-2 md:mb-12 md:pr-4" />
-            <div class="mb-12 md:mb-0 md:pl-4">
-                <div class="flex flex-col">
-                    <h4>{ individual.Title }</h4>
-                    <p>{ individual.Location }</p>
-                    <time>{ individual.Date }</time>
+        <div class="md:mb-12">
+            <a class="flex flex-col grid grid-cols-1 md:grid md:grid-cols-3 gap-4 hover:text-[#555555]" href={ templ.URL(individual.Href) }>
+                <img src={ individual.BaseImage.Src } alt={ individual.BaseImage.Alt } class="w-full md:col-span-2 md:pr-4" />
+                <div class="mb-12 md:mb-0 md:pl-4">
+                    <div class="flex flex-col">
+                        <h4>{ individual.Title }</h4>
+                        <p>{ individual.Location }</p>
+                        <time>{ individual.Date }</time>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
     }
 
+    <h3 class="uppercase mb-8">Group Exhibitions</h3>
     for _, group := range data.Group {
-        <h3 class="uppercase mb-8">Group Exhibitions</h3>
-        <a class="flex flex-col grid grid-cols-1 md:grid md:grid-cols-3 gap-4" href={ templ.URL(group.Href) }>
-            <img src={ group.BaseImage.Src } alt={ group.BaseImage.Alt } class="w-full md:col-span-2 md:mb-12 md:pr-4" />
-            <div class="mb-12 md:mb-0 md:pl-4">
-                <div class="flex flex-col">
-                    <h4>{ group.Title }</h4>
-                    <p>{ group.Location }</p>
-                    <time>{ group.Date }</time>
+        <div class="md:mb-12">
+            <a class="flex flex-col grid grid-cols-1 md:grid md:grid-cols-3 gap-4 hover:text-[#555555]" href={ templ.URL(group.Href) }>
+                <img src={ group.BaseImage.Src } alt={ group.BaseImage.Alt } class="w-full md:col-span-2 md:pr-4" />
+                <div class="mb-12 md:mb-0 md:pl-4">
+                    <div class="flex flex-col">
+                        <h4>{ group.Title }</h4>
+                        <p>{ group.Location }</p>
+                        <time>{ group.Date }</time>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
     }
 }
