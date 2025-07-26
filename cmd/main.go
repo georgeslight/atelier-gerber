@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	//"github.com/a-h/templ"
+	"kristin-gerber/internal/model"
 	"kristin-gerber/views/layouts"
 	"kristin-gerber/views/pages"
 	"net/http"
@@ -29,7 +30,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func exhibitionsHandler(w http.ResponseWriter, r *http.Request) {
-	exhibitionsPage := pages.ExhibitionPage()
+	exhibitionsPage := pages.ExhibitionPage(model.GetExhibitionsData())
 	html := layouts.BaseLayout(exhibitionsPage)
 	html.Render(r.Context(), w)
 }
