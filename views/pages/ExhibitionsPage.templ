@@ -11,7 +11,7 @@ templ ExhibitionPage(data model.ExhibitionsData) {
                 <img src={ individual.BaseImage.Src } alt={ individual.BaseImage.Alt } class="w-full md:col-span-2 md:pr-4" />
                 <div class="mb-12 md:mb-0 md:pl-4">
                     <div class="flex flex-col">
-                        <h4>{ individual.Title }</h4>
+                        <h2>{ individual.Title }</h2>
                         <p>{ individual.Location }</p>
                         <time>{ individual.Date }</time>
                     </div>
@@ -27,7 +27,7 @@ templ ExhibitionPage(data model.ExhibitionsData) {
                 <img src={ group.BaseImage.Src } alt={ group.BaseImage.Alt } class="w-full md:col-span-2 md:pr-4" />
                 <div class="mb-12 md:mb-0 md:pl-4">
                     <div class="flex flex-col">
-                        <h4>{ group.Title }</h4>
+                        <h2>{ group.Title }</h2>
                         <p>{ group.Location }</p>
                         <time>{ group.Date }</time>
                     </div>

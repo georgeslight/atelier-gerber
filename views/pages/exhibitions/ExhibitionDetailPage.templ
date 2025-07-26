@@ -4,7 +4,25 @@ import "kristin-gerber/internal/model"
 
 templ ExhibitionDetailPage(exhibition model.Exhibition) {
     <div>
-        <p>{ exhibition.Location }</p>
+        <div>
+            <h2>{ exhibition.Title }</h2>
+            <h2>{ exhibition.Location }</h2>
+        </div>
+        <div class="my-8">
+            for _, image := range exhibition.Details.Images {
+                <img src={ image.Src } alt="" />
+            }
+        </div>
+        <div>
+            <div class="uppercase tracking-wide">
+                <h2>{ exhibition.Title }</h2>
+            </div>
+            <div class="grid grid-cols-6">
+                <p class="col-span-5 whitespace-pre-line my-4">{ exhibition.Details.Description }</p>
+            </div>
+            <div>
+            </div>
+        </div>
     </div>
 
 }
