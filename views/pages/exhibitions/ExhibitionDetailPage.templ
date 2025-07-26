@@ -12,10 +12,12 @@ templ ExhibitionDetailPage(exhibition model.Exhibition) {
             <h2>{ exhibition.Location }</h2>
         </div>
         <div class="my-8" x-data="{ currentIndex: 0 }">
-            <div class="relative inline-block">
+            <div class="relative inline-block w-full">
                 <!-- Images -->
                 for i, image := range exhibition.Details.Images {
-                    <img src={ image.Src } alt="" x-show={ "currentIndex === " + strconv.Itoa(i) } class="w-full h-auto"/>
+                    <div x-show={ "currentIndex === " + strconv.Itoa(i) } class="flex items-center justify-center w-full">
+                        <img src={ image.Src } alt="" class="min-h-[800px] object-contain"/>
+                    </div>
                 }
                 <!-- Left Navigation Area - cursor changes to left arrow -->
                 <div class="absolute left-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-left.png),_pointer]"
