@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
+	"strings"
+
 	//"github.com/a-h/templ"
 	"kristin-gerber/internal/model"
 	"kristin-gerber/views/layouts"
 	"kristin-gerber/views/pages"
+	"kristin-gerber/views/pages/exhibitions"
 	"net/http"
 )
 
@@ -15,6 +18,7 @@ func main() {
 	//component := layouts.BaseLayout()
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/exhibitions", exhibitionsHandler)
+	http.HandleFunc("/exhibitions/{id}", exhibitionDetailHandler)
 	http.HandleFunc("/works", worksHandler)
 	http.HandleFunc("/about", aboutHandler)
 	http.HandleFunc("/contact", contactHandler)
@@ -35,6 +39,27 @@ func exhibitionsHandler(w http.ResponseWriter, r *http.Request) {
 	html.Render(r.Context(), w)
 }
 
+func exhibitionDetailHandler(w http.ResponseWriter, r *http.Request) {
+	id := strings.TrimPrefix(r.URL.Path, "/exhibitions/")
+
+	// Check for invalid ID first
+	if id == "" || id == r.URL.Path {
+		http.NotFound(w, r)
+		return
+	}
+
+	exhibition := findExhibitionByID(id)
+	if exhibition == nil {
+		http.NotFound(w, r)
+		return
+	}
+
+	// Render the exhibition detail page
+	exhibitionDetailPage := exhibitions.ExhibitionDetailPage(*exhibition)
+	html := layouts.BaseLayout(exhibitionDetailPage)
+	html.Render(r.Context(), w)
+}
+
 func worksHandler(w http.ResponseWriter, r *http.Request) {
 	worksPage := pages.WorksPage()
 	html := layouts.BaseLayout(worksPage)
@@ -51,4 +76,20 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	contactPage := pages.ContactPage()
 	html := layouts.BaseLayout(contactPage)
 	html.Render(r.Context(), w)
+}
+
+func findExhibitionByID(id string) *model.Exhibition {
+	data := model.GetExhibitionsData()
+
+	for _, exhibition := range data.Individual {
+		if exhibition.ID == id {
+			return &exhibition
+		}
+	}
+	for _, exhibition := range data.Group {
+		if exhibition.ID == id {
+			return &exhibition
+		}
+	}
+	return nil
 }

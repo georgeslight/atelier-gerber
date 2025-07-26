@@ -29,11 +29,11 @@ func GetExhibitionsData() ExhibitionsData {
 	return ExhibitionsData{
 		Individual: []Exhibition{
 			{
-				ID:       "1",
+				ID:       "galerie-metamorphose",
 				Title:    "Kristin Gerber",
 				Location: "Galerie Métamorphose, Paris",
 				Date:     "1963",
-				Href:     "/exhibitions/b002",
+				Href:     "/exhibitions/galerie-metamorphose",
 				BaseImage: ExhibitionImage{
 					Src: "/static/images/b002.jpg",
 					Alt: "Galerie Métamorphose",
@@ -53,11 +53,11 @@ func GetExhibitionsData() ExhibitionsData {
 				},
 			},
 			{
-				ID:       "2",
+				ID:       "international-studio-program",
 				Title:    "International Studio Program",
 				Location: "MoMA PS1, Long Island City, New York",
 				Date:     "1978 - 1979",
-				Href:     "/exhibitions/b003",
+				Href:     "/exhibitions/international-studio-program",
 				BaseImage: ExhibitionImage{
 					Src: "/static/images/b002.jpg",
 					Alt: "MoMA PS1",
@@ -75,11 +75,11 @@ func GetExhibitionsData() ExhibitionsData {
 		},
 		Group: []Exhibition{
 			{
-				ID:       "3",
+				ID:       "group-exhibition-example",
 				Title:    "Group Exhibition Example",
 				Location: "Contemporary Art Museum",
 				Date:     "2023",
-				Href:     "/exhibitions/group1",
+				Href:     "/exhibitions/group-exhibition-example",
 				BaseImage: ExhibitionImage{
 					Src: "/static/images/b002.jpg",
 					Alt: "Group exhibition",
