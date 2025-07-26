@@ -143,7 +143,7 @@ setup-go:
 	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
 	@$(GO_BIN) mod init $(PROJECT_NAME) 2>/dev/null || true
 	@$(GO_BIN) mod tidy >/dev/null 2>&1
-	@$(GO_BIN) get -u github.com/a-h/templ
+	@$(GO_BIN) get -u github.com/a-h/templ@latest
 	@printf "$(CHECK) Go modules ready\n"
 
 setup-tailwind:
