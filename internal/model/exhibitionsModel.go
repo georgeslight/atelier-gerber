@@ -81,21 +81,29 @@ func GetExhibitionsData() ExhibitionsData {
 			{
 				ID:       "group-exhibition-example",
 				Title:    "Group Exhibition Example",
-				Location: "Contemporary Art Museum",
+				Location: "Test Art Museum",
 				Date:     "2023",
 				Href:     "/exhibitions/group-exhibition-example",
 				BaseImage: ExhibitionImage{
-					Src: "/static/images/b002.jpg",
-					Alt: "Group exhibition",
+					Src: "/static/images/test/waiting-pavillions-1.jpg",
+					Alt: "Test Image 01",
 				},
 				Details: ExhibitionDetails{
 					Images: []ExhibitionImage{
 						{
-							Src: "/static/images/group_detail1.jpg",
-							Alt: "Group detail 1",
+							Src: "/static/images/test/waiting-pavillions-1.jpg",
+							Alt: "Test Image 01",
+						},
+						{
+							Src: "/static/images/test/waiting-pavillions-2.jpg",
+							Alt: "Test Image 02",
+						},
+						{
+							Src: "/static/images/test/waiting-pavillions-3.jpg",
+							Alt: "Test Image 03",
 						},
 					},
-					Description: "A contemporary group exhibition",
+					Description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\n\nDuis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.\n\nUt wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
 				},
 			},
 		},
