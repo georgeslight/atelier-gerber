@@ -35,21 +35,21 @@ func GetExhibitionsData() ExhibitionsData {
 				Date:     "1963",
 				Href:     "/exhibitions/galerie-metamorphose",
 				BaseImage: ExhibitionImage{
-					Src: "/static/images/galerie-metamorphose/galerie-metamorphose-01.png",
+					Src: "/static/images/exhibitions/galerie-metamorphose/galerie-metamorphose-01.png",
 					Alt: "Galerie Métamorphose",
 				},
 				Details: ExhibitionDetails{
 					Images: []ExhibitionImage{
 						{
-							Src: "/static/images/galerie-metamorphose/galerie-metamorphose-01.png",
+							Src: "/static/images/exhibitions/galerie-metamorphose/galerie-metamorphose-01.png",
 							Alt: "Galerie Métamorphose 01",
 						},
 						{
-							Src: "/static/images/galerie-metamorphose/galerie-metamorphose-02.png",
+							Src: "/static/images/exhibitions/galerie-metamorphose/galerie-metamorphose-02.png",
 							Alt: "Galerie Métamorphose 02",
 						},
 						{
-							Src: "/static/images/galerie-metamorphose/galerie-metamorphose-03.png",
+							Src: "/static/images/exhibitions/galerie-metamorphose/galerie-metamorphose-03.png",
 							Alt: "Galerie Métamorphose 03",
 						},
 					},

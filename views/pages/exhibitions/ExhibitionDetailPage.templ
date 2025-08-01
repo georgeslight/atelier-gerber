@@ -17,7 +17,7 @@ templ ExhibitionDetailPage(exhibition model.Exhibition) {
                  totalImages: 0,
                  intervalId: null,
                  init() {
-                     this.totalImages = parseInt(this.$el.dataset.totalImages);
+                     this.totalImages = parseInt($el.dataset.totalImages);
                      if (this.totalImages > 1) {
                         this.autoAdvance()
                     }
@@ -42,7 +42,7 @@ templ ExhibitionDetailPage(exhibition model.Exhibition) {
                 <!-- Images -->
                 for i, image := range exhibition.Details.Images {
                     <div x-show={ "currentIndex === " + strconv.Itoa(i) } class="flex items-center justify-center w-full">
-                        <img src={ image.Src } alt={ image.Alt } class="min-h-[333px] sm:min-h-[550px] md:min-h-[650px] lg:min-h-[800px] object-contain"/>
+                        <img src={ image.Src } alt={ image.Alt } class="h-[333px] sm:h-[550px] md:h-[650px] lg:h-[800px] object-contain"/>
                     </div>
                 }
                 <!-- Left Navigation Area - cursor changes to left arrow -->
