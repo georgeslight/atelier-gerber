@@ -1,5 +1,74 @@
 package pages
 
-templ WorksPage() {
-    <h1 class="text-3xl font-bold text-[#007D9C]">Hello World From Works</h1>
+import "kristin-gerber/internal/model"
+import "strconv"
+
+templ WorksPage(data model.WorksData) {
+    <div class="container mx-auto" x-data="{ activeFilter: 'all' }">
+        <div class="flex justify-left gap-5 sm:gap-12 mb-8">
+            <button
+                class="uppercase text-sm hover:text-[#555555]"
+                :class="activeFilter === 'all' ? 'underline' : ''"
+                @click="activeFilter = 'all'"
+            >
+                All
+            </button>
+            <button
+                class="uppercase text-sm hover:text-[#555555]"
+                :class="activeFilter === 'turnables' ? 'underline' : ''"
+                @click="activeFilter = 'turnables'"
+            >
+                Turnables
+            </button>
+            <button
+                class="uppercase text-sm hover:text-[#555555]"
+                :class="activeFilter === 'jewellery' ? 'underline' : ''"
+                @click="activeFilter = 'jewellery'"
+            >
+                Jewellery
+            </button>
+            <button
+                class="uppercase text-sm hover:text-[#555555]"
+                :class="activeFilter === 'pictures' ? 'underline' : ''"
+                @click="activeFilter = 'pictures'"
+            >
+                Pictures
+            </button>
+        </div>
+
+        <div class="flex flex-col grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-item-center gap-6">
+            for _, works := range data.WorksData {
+                <a
+                    class="col-span-1 flex justify-center items-center"
+                    data-category={ works.Category }
+                    data-images-count={ strconv.Itoa(len(works.Images)) }
+                    x-show="activeFilter === 'all' || activeFilter === $el.dataset.category"
+                    x-data="{
+                        currentIndex: 0,
+                        totalImages: 0,
+                        init() {
+                            this.totalImages = parseInt($el.dataset.imagesCount);
+                             if (this.totalImages > 1) {
+                                this.autoAdvance()
+                             }
+                        },
+                        autoAdvance() {
+                            this.intervalId = setInterval(() => {
+                                if (this.currentIndex < this.totalImages - 1) {
+                                    this.currentIndex++;
+                                } else {
+                                    this.currentIndex = 0;
+                                }
+                            }, 5000);
+                        }
+                    }"
+                    href={ templ.URL(works.Href) }
+                >
+                    for i, image := range works.Images {
+                        <img x-show={ "currentIndex === " + strconv.Itoa(i) } class="object-contain w-full h-full" src={ image.Src } alt={ image.Alt } />
+                    }
+                </a>
+            }
+        </div>
+    </div>
 }

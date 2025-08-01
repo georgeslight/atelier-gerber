@@ -9,6 +9,7 @@ import (
 	"kristin-gerber/views/layouts"
 	"kristin-gerber/views/pages"
 	"kristin-gerber/views/pages/exhibitions"
+	"kristin-gerber/views/pages/works"
 	"net/http"
 )
 
@@ -20,6 +21,7 @@ func main() {
 	http.HandleFunc("/exhibitions", exhibitionsHandler)
 	http.HandleFunc("/exhibitions/{id}", exhibitionDetailHandler)
 	http.HandleFunc("/works", worksHandler)
+	http.HandleFunc("/works/{id}", workDetailHandler)
 	http.HandleFunc("/about", aboutHandler)
 	http.HandleFunc("/contact", contactHandler)
 
@@ -61,8 +63,29 @@ func exhibitionDetailHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func worksHandler(w http.ResponseWriter, r *http.Request) {
-	worksPage := pages.WorksPage()
+	worksPage := pages.WorksPage(model.GetWorksData())
 	html := layouts.BaseLayout(worksPage)
+	html.Render(r.Context(), w)
+}
+
+func workDetailHandler(w http.ResponseWriter, r *http.Request) {
+	id := strings.TrimPrefix(r.URL.Path, "/works/")
+
+	// Check for invalid ID first
+	if id == "" || id == r.URL.Path {
+		http.NotFound(w, r)
+		return
+	}
+
+	work := findWorkByID(id)
+	if work == nil {
+		http.NotFound(w, r)
+		return
+	}
+
+	// Render the exhibition detail page
+	workDetailPage := works.WorksDetailPage(*work)
+	html := layouts.BaseLayout(workDetailPage)
 	html.Render(r.Context(), w)
 }
 
@@ -89,6 +112,17 @@ func findExhibitionByID(id string) *model.Exhibition {
 	for _, exhibition := range data.Group {
 		if exhibition.ID == id {
 			return &exhibition
+		}
+	}
+	return nil
+}
+
+func findWorkByID(id string) *model.Work {
+	data := model.GetWorksData()
+
+	for _, work := range data.WorksData {
+		if work.ID == id {
+			return &work
 		}
 	}
 	return nil
