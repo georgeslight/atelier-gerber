@@ -11,6 +11,7 @@ type WorksData struct {
 
 type Work struct {
 	ID          string       `json:"id"`
+	Title       string       `json:"title"`
 	Category    string       `json:"category"`
 	Images      []WorksImage `json:"image"`
 	Href        string       `json:"href"`
@@ -22,6 +23,7 @@ func GetWorksData() WorksData {
 		WorksData: []Work{
 			{
 				ID:       "die-zwei-jacobs",
+				Title:    "Die Zwei Jacobs",
 				Category: "turnables",
 				Images: []WorksImage{
 					{Src: "/static/images/works/turnables/die-zwei-jacobs/die-zwei-jacobs-01.png", Alt: "Die Zwei Jacobs 01"},
