@@ -14,6 +14,8 @@ MAIN_GO := cmd/main.go
 TEMPL_FILES := $(shell find . -type f -name "*.templ")
 TEMPL_GO_FILES := $(TEMPL_FILES:.templ=_templ.go)
 
+PROD_BINARY := $(BUILD_DIR)/$(PROJECT_NAME)
+
 # Simple color scheme
 CYAN := \033[36m
 DIM := \033[2m
@@ -101,7 +103,7 @@ tmp_dir = "build"\n\
 '
 
 
-.PHONY: check-deps init create-dirs setup-go setup-tailwind build serve watch clean help templ
+.PHONY: check-deps init create-dirs setup-go setup-tailwind build serve watch clean help templ deploy
 
 init: check-deps create-dirs setup-go setup-tailwind
 	@printf "\n$(CHECK) Project setup complete!\n"
@@ -154,7 +156,7 @@ setup-tailwind:
 	@echo '@import "tailwindcss";' > $(STATIC_DIR)/css/input.css
 	@printf "$(CHECK) Tailwind CSS ready\n"
 
-build: check-deps templ css
+build: check-deps
 	@printf "\n$(CYAN)Building project$(RESET)\n"
 	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
 	@$(GO_BIN) build -o $(BUILD_DIR) $(MAIN_GO)
@@ -179,10 +181,22 @@ watch:
 	@bunx @tailwindcss/cli -i $(STATIC_DIR)/css/input.css -o $(STATIC_DIR)/css/styles.css --watch=always &
 	@air
 
+clean:
+	@printf "\n$(CYAN)Cleaning build files$(RESET)\n"
+	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
+	@rm -rf $(BUILD_DIR)
+	@find . -type f -name "*_templ.go" -delete
+	@printf "$(CHECK) Clean complete\n"
+
 serve: templ css
 	@printf "\n$(CYAN)Starting server$(RESET)\n"
 	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
 	@$(GO_BIN) run $(MAIN_GO) serve
+
+deploy: clean templ css
+	@printf "\n$(CYAN)Building production binary$(RESET)\n"
+	@GOOS=linux GOARCH=amd64 $(GO_BIN) build -ldflags="-s -w" -o $(PROD_BINARY) $(MAIN_GO)
+	@printf "$(CHECK) Production build complete: $(PROD_BINARY)\n"
 
 help:
 	@printf "\n$(CYAN)Available commands$(RESET)\n"
