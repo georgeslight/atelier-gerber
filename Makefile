@@ -193,7 +193,7 @@ serve: templ css
 	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
 	@$(GO_BIN) run $(MAIN_GO) serve
 
-deploy: clean templ css
+deploy: clean templ css build
 	@printf "\n$(CYAN)Building production binary$(RESET)\n"
 	@GOOS=linux GOARCH=amd64 $(GO_BIN) build -ldflags="-s -w" -o $(PROD_BINARY) $(MAIN_GO)
 	@printf "$(CHECK) Production build complete: $(PROD_BINARY)\n"
