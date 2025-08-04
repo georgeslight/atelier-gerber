@@ -22,18 +22,18 @@ func GetWorksData() WorksData {
 	return WorksData{
 		WorksData: []Work{
 			{
-				ID:       "die-zwei-jacobs",
-				Title:    "Die Zwei Jacobs",
+				ID:       "die-zwei-jacos",
+				Title:    "Die zwei Jacos",
 				Category: "turnables",
 				Images: []WorksImage{
-					{Src: "/static/images/works/turnables/die-zwei-jacobs/die-zwei-jacobs-01.png", Alt: "Die Zwei Jacobs 01"},
-					{Src: "/static/images/works/turnables/die-zwei-jacobs/die-zwei-jacobs-02.png", Alt: "Die Zwei Jacobs 02"},
-					{Src: "/static/images/works/turnables/die-zwei-jacobs/die-zwei-jacobs-03.png", Alt: "Die Zwei Jacobs 03"},
-					{Src: "/static/images/works/turnables/die-zwei-jacobs/die-zwei-jacobs-04.png", Alt: "Die Zwei Jacobs 04"},
-					{Src: "/static/images/works/turnables/die-zwei-jacobs/die-zwei-jacobs-05.png", Alt: "Die Zwei Jacobs 05"},
-					{Src: "/static/images/works/turnables/die-zwei-jacobs/die-zwei-jacobs-06.png", Alt: "Die Zwei Jacobs 06"},
+					{Src: "/static/images/works/turnables/die-zwei-jacos/die-zwei-jacos-01.png", Alt: "Die zwei Jacos 01"},
+					{Src: "/static/images/works/turnables/die-zwei-jacos/die-zwei-jacos-02.png", Alt: "Die zwei Jacos 02"},
+					{Src: "/static/images/works/turnables/die-zwei-jacos/die-zwei-jacos-03.png", Alt: "Die zwei Jacos 03"},
+					{Src: "/static/images/works/turnables/die-zwei-jacos/die-zwei-jacos-04.png", Alt: "Die zwei Jacos 04"},
+					{Src: "/static/images/works/turnables/die-zwei-jacos/die-zwei-jacos-05.png", Alt: "Die zwei Jacos 05"},
+					{Src: "/static/images/works/turnables/die-zwei-jacos/die-zwei-jacos-06.png", Alt: "Die zwei Jacos 06"},
 				},
-				Href:        "/works/die-zwei-jacobs",
+				Href:        "/works/die-zwei-jacos",
 				Description: "A beautiful turnable item",
 			},
 			{
