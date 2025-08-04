@@ -15,7 +15,6 @@ RUN bun install
 COPY views/ ./views/
 COPY internal/ ./internal/
 COPY static/ ./static/
-#COPY tailwind.config.js ./
 
 # Build CSS with Tailwind scanning all template files
 RUN bunx tailwindcss --input ./static/css/input.css --output ./static/css/styles.css --minify
@@ -32,7 +31,7 @@ COPY --from=fetch-stage /go/pkg /go/pkg
 COPY --from=generate-stage /app /app
 COPY --from=css-stage /app/static/css/styles.css /app/static/css/styles.css
 WORKDIR /app
-RUN CGO_ENABLED=0 GOOS=linux go build -buildvcs=false -o /app/app
+RUN CGO_ENABLED=0 GOOS=linux go build -buildvcs=false -o /app/app ./cmd
 
 # Test
 FROM build-stage AS test-stage
