@@ -32,7 +32,7 @@ COPY --from=fetch-stage /go/pkg /go/pkg
 COPY --from=generate-stage /app /app
 COPY --from=css-stage /app/static/css/styles.css /app/static/css/styles.css
 WORKDIR /app
-RUN CGO_ENABLED=0 GOOS=linux go build -o /app/app ./cmd
+RUN CGO_ENABLED=0 GOOS=linux go build -o /app/app
 
 # Test
 FROM build-stage AS test-stage
