@@ -18,7 +18,7 @@ COPY static/ ./static/
 #COPY tailwind.config.js ./
 
 # Build CSS with Tailwind scanning all template files
-RUN bunx tailwindcss -i ./static/css/input.css -o ./static/css/styles.css --config ./tailwind.config.js --minify
+RUN bunx tailwindcss --input ./static/css/input.css --output ./static/css/styles.css --minify
 
 # Generate templ files
 FROM ghcr.io/a-h/templ:latest AS generate-stage
@@ -32,7 +32,7 @@ COPY --from=fetch-stage /go/pkg /go/pkg
 COPY --from=generate-stage /app /app
 COPY --from=css-stage /app/static/css/styles.css /app/static/css/styles.css
 WORKDIR /app
-RUN CGO_ENABLED=0 GOOS=linux go build -o /app/app
+RUN CGO_ENABLED=0 GOOS=linux go build -o /app/app ./cmd
 
 # Test
 FROM build-stage AS test-stage
