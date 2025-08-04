@@ -1,53 +1,48 @@
-# syntax = docker/dockerfile:1
-
-# Build stage for Go application
-FROM golang:1.24-alpine AS go-builder
-
-WORKDIR /app
-
-# Install templ
-RUN go install github.com/a-h/templ/cmd/templ@latest
-
-# Copy Go modules
+# Fetch dependencies
+FROM golang:latest AS fetch-stage
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Copy source code
-COPY . .
-
-# Generate templ files and build Go binary
-RUN templ generate && \
-    CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main cmd/main.go
-
-# Build stage for frontend assets
-FROM oven/bun:1.1-slim AS frontend-builder
-
+# Build CSS assets
+FROM oven/bun:1.1-slim AS css-stage
 WORKDIR /app
 
-# Copy package files
-COPY package.json bun.lock* ./
+# Copy package files and install dependencies
+COPY package.json bun.lockb* ./
 RUN bun install
 
-# Copy static files and build CSS
+# Copy source files for Tailwind to scan
+COPY views/ ./views/
+COPY internal/ ./internal/
 COPY static/ ./static/
-COPY tailwind.config.js ./
+#COPY tailwind.config.js ./
 
-RUN bunx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/styles.css --minify
+# Build CSS with Tailwind scanning all template files
+RUN bunx tailwindcss -i ./static/css/input.css -o ./static/css/styles.css --config ./tailwind.config.js --minify
 
-# Final stage
-FROM alpine:latest
+# Generate templ files
+FROM ghcr.io/a-h/templ:latest AS generate-stage
+COPY --chown=65532:65532 . /app
+WORKDIR /app
+RUN ["templ", "generate"]
 
-LABEL fly_launch_runtime="Go"
+# Build Go application
+FROM golang:latest AS build-stage
+COPY --from=fetch-stage /go/pkg /go/pkg
+COPY --from=generate-stage /app /app
+COPY --from=css-stage /app/static/css/styles.css /app/static/css/styles.css
+WORKDIR /app
+RUN CGO_ENABLED=0 GOOS=linux go build -o /app/app
 
-RUN apk --no-cache add ca-certificates
-WORKDIR /root/
+# Test
+FROM build-stage AS test-stage
+RUN go test -v ./...
 
-# Copy Go binary
-COPY --from=go-builder /app/main .
-
-# Copy static assets
-COPY --from=frontend-builder /app/static ./static
-
+# Deploy
+FROM gcr.io/distroless/base-debian12 AS deploy-stage
+WORKDIR /
+COPY --from=build-stage /app/app /app
+COPY --from=build-stage /app/static /static
 EXPOSE 3000
-
-CMD ["./main"]
+USER nonroot:nonroot
+ENTRYPOINT ["/app"]
