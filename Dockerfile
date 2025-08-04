@@ -30,6 +30,8 @@ RUN bun install
 
 # Copy static files and build CSS
 COPY static/ ./static/
+COPY tailwind.config.js ./
+
 RUN bunx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/styles.css --minify
 
 # Final stage
