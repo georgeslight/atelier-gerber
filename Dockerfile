@@ -3,7 +3,13 @@ FROM golang:latest AS fetch-stage
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Build CSS assets
+# Generate templ files FIRST
+FROM ghcr.io/a-h/templ:latest AS generate-stage
+COPY --chown=65532:65532 . /app
+WORKDIR /app
+RUN ["templ", "generate"]
+
+# Build CSS assets AFTER templ generation
 FROM oven/bun:1.1-slim AS css-stage
 WORKDIR /app
 
@@ -11,25 +17,16 @@ WORKDIR /app
 COPY package.json bun.lockb* ./
 RUN bun install
 
-# Copy source files for Tailwind to scan
-COPY views/ ./views/
-COPY internal/ ./internal/
-COPY static/ ./static/
+# Copy ALL generated files from previous stage
+COPY --from=generate-stage /app ./
 
-# Generate templ files
-FROM ghcr.io/a-h/templ:latest AS generate-stage
-COPY --chown=65532:65532 . /app
-WORKDIR /app
-RUN ["templ", "generate"]
-
-# Build CSS with Tailwind scanning all template files
+# Now Tailwind scans the generated .go files, not just .templ files
 RUN bunx tailwindcss --input ./static/css/input.css --output ./static/css/styles.css --minify
 
 # Build Go application
 FROM golang:latest AS build-stage
 COPY --from=fetch-stage /go/pkg /go/pkg
-COPY --from=generate-stage /app /app
-COPY --from=css-stage /app/static/css/styles.css /app/static/css/styles.css
+COPY --from=css-stage /app /app
 WORKDIR /app
 RUN CGO_ENABLED=0 GOOS=linux go build -buildvcs=false -o /app/app ./cmd
 
