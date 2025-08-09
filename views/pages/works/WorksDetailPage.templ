@@ -6,73 +6,73 @@ import (
 )
 
 templ WorksDetailPage(works model.Work) {
-    <div>
-            <div>
-                <h2>{ works.Title }</h2>
-            </div>
-            <div class="my-8"
-                 x-data="{
-                     currentIndex: 0,
-                     totalImages: 0,
-                     intervalId: null,
-                     init() {
-                         this.totalImages = parseInt($el.dataset.totalImages);
-                         if (this.totalImages > 1) {
-                            this.autoAdvance()
+    <div class="w-full">
+        <div>
+            <h2>{ works.Title }</h2>
+        </div>
+        <div class="my-8"
+             x-data="{
+                 currentIndex: 0,
+                 totalImages: 0,
+                 intervalId: null,
+                 init() {
+                     this.totalImages = parseInt($el.dataset.totalImages);
+                     if (this.totalImages > 1) {
+                        this.autoAdvance()
+                    }
+                 },
+                 autoAdvance() {
+                    this.intervalId = setInterval(() => {
+                        if (this.currentIndex < this.totalImages - 1) {
+                            this.currentIndex++;
+                        } else {
+                            this.currentIndex = 0;
                         }
-                     },
-                     autoAdvance() {
-                        this.intervalId = setInterval(() => {
-                            if (this.currentIndex < this.totalImages - 1) {
-                                this.currentIndex++;
-                            } else {
-                                this.currentIndex = 0;
-                            }
-                        }, 5000);
-                     },
-                     resetTimer() {
-                        if (this.intervalId) { clearInterval(this.intervalId); }
-                        if (this.totalImages > 1) { this.autoAdvance(); }
-                     }
-                 }"
-                 data-total-images={ strconv.Itoa(len(works.Images)) }
-            >
-                <div class="relative inline-block w-full">
-                    <!-- Images -->
-                    for i, image := range works.Images {
-                        <div x-show={ "currentIndex === " + strconv.Itoa(i) } class="flex items-center justify-center w-full">
-                            <img src={ image.Src } alt={ image.Alt } class="h-[333px] sm:h-[550px] md:h-[650px] lg:h-[800px] object-contain"/>
-                        </div>
-                    }
-                    <!-- Left Navigation Area - cursor changes to left arrow -->
-                    <div class="absolute left-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-left.png),_pointer]"
-                         @click={ "currentIndex = currentIndex > 0 ? currentIndex - 1 : totalImages - 1; resetTimer()" }>
+                    }, 5000);
+                 },
+                 resetTimer() {
+                    if (this.intervalId) { clearInterval(this.intervalId); }
+                    if (this.totalImages > 1) { this.autoAdvance(); }
+                 }
+             }"
+             data-total-images={ strconv.Itoa(len(works.Images)) }
+        >
+            <div class="relative inline-block w-full">
+                <!-- Images -->
+                for i, image := range works.Images {
+                    <div x-show={ "currentIndex === " + strconv.Itoa(i) } class="flex items-center justify-center w-full">
+                        <img src={ image.Src } alt={ image.Alt } class="h-[333px] sm:h-[550px] md:h-[650px] lg:h-[800px] object-contain"/>
                     </div>
-                    <!-- Right Navigation Area - cursor changes to right arrow -->
-                    <div class="absolute right-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-right.png),_pointer]"
-                         @click={ "currentIndex = currentIndex < totalImages - 1  ? currentIndex + 1 : 0; resetTimer()" }>
-                    </div>
+                }
+                <!-- Left Navigation Area - cursor changes to left arrow -->
+                <div class="absolute left-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-left.png),_pointer]"
+                     @click={ "currentIndex = currentIndex > 0 ? currentIndex - 1 : totalImages - 1; resetTimer()" }>
                 </div>
-                <!-- Dot Navigation -->
-                <div class="flex justify-center mt-4 space-x-2">
-                    for i := range works.Images {
-                        <button
-                            @click={ "currentIndex = " + strconv.Itoa(i) }
-                            class="w-2.5 h-2.5 rounded-full focus:outline-none transition-colors"
-                            :class={ "currentIndex === " + strconv.Itoa(i) + " ? 'bg-gray-700' : 'bg-gray-300'" }
-                        ></button>
-                    }
+                <!-- Right Navigation Area - cursor changes to right arrow -->
+                <div class="absolute right-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-right.png),_pointer]"
+                     @click={ "currentIndex = currentIndex < totalImages - 1  ? currentIndex + 1 : 0; resetTimer()" }>
                 </div>
             </div>
-            <div>
-                <div class="uppercase tracking-wide">
-                    <h2>{ works.Title }</h2>
-                </div>
-                <div class="grid md:grid-cols-6">
-                    <p class="col-span-5 whitespace-pre-line my-4">{ works.Description }</p>
-                </div>
-                <div>
-                </div>
+            <!-- Dot Navigation -->
+            <div class="flex justify-center mt-4 space-x-2">
+                for i := range works.Images {
+                    <button
+                        @click={ "currentIndex = " + strconv.Itoa(i) }
+                        class="w-2.5 h-2.5 rounded-full focus:outline-none transition-colors"
+                        :class={ "currentIndex === " + strconv.Itoa(i) + " ? 'bg-gray-700' : 'bg-gray-300'" }
+                    ></button>
+                }
             </div>
         </div>
+        <div>
+            <div class="uppercase tracking-wide">
+                <h2>{ works.Title }</h2>
+            </div>
+            <div class="grid md:grid-cols-6">
+                <p class="col-span-5 whitespace-pre-line my-4">{ works.Description }</p>
+            </div>
+            <div>
+            </div>
+        </div>
+    </div>
 }
