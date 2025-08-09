@@ -4,75 +4,77 @@ import "kristin-gerber/internal/model"
 import "strconv"
 
 templ WorksPage(data model.WorksData) {
-    <div class="container mx-auto" x-data="{ activeFilter: 'all' }">
-        <div class="flex justify-left gap-5 sm:gap-12 mb-8">
-            <button
-                class="uppercase text-sm hover:text-[#555555]"
-                :class="activeFilter === 'all' ? 'underline' : ''"
-                @click="activeFilter = 'all'"
-            >
-                All
-            </button>
-            <button
-                class="uppercase text-sm hover:text-[#555555]"
-                :class="activeFilter === 'turnables' ? 'underline' : ''"
-                @click="activeFilter = 'turnables'"
-            >
-                Turnables
-            </button>
-            <button
-                class="uppercase text-sm hover:text-[#555555]"
-                :class="activeFilter === 'jewellery' ? 'underline' : ''"
-                @click="activeFilter = 'jewellery'"
-            >
-                Jewellery
-            </button>
-            <button
-                class="uppercase text-sm hover:text-[#555555]"
-                :class="activeFilter === 'pictures' ? 'underline' : ''"
-                @click="activeFilter = 'pictures'"
-            >
-                Pictures
-            </button>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-item-center gap-10">
-            for _, works := range data.WorksData {
-                <div
-                    class="col-span-1 flex flex-col hover:text-[#555555]"
-                    data-category={ works.Category }
-                    data-images-count={ strconv.Itoa(len(works.Images)) }
-                    x-show="activeFilter === 'all' || activeFilter === $el.dataset.category"
-                    x-data="{
-                        currentIndex: 0,
-                        totalImages: 0,
-                        init() {
-                            this.totalImages = parseInt($el.dataset.imagesCount);
-                             if (this.totalImages > 1) {
-                                this.autoAdvance()
-                             }
-                        },
-                        autoAdvance() {
-                            this.intervalId = setInterval(() => {
-                                if (this.currentIndex < this.totalImages - 1) {
-                                    this.currentIndex++;
-                                } else {
-                                    this.currentIndex = 0;
-                                }
-                            }, 5000);
-                        }
-                    }"
+    <div class="w-full">
+        <div class="container mx-auto" x-data="{ activeFilter: 'all' }">
+            <div class="flex justify-left gap-5 sm:gap-12 mb-8">
+                <button
+                    class="uppercase text-sm hover:text-[#555555]"
+                    :class="activeFilter === 'all' ? 'underline' : ''"
+                    @click="activeFilter = 'all'"
                 >
-                    <a href={ templ.URL(works.Href) } class="block">
-                        <div class="relative w-full h-64">
-                            for i, image := range works.Images {
-                                <img x-show={ "currentIndex === " + strconv.Itoa(i) } class="absolute inset-0 object-contain w-full h-full" src={ image.Src } alt={ image.Alt } />
+                    All
+                </button>
+                <button
+                    class="uppercase text-sm hover:text-[#555555]"
+                    :class="activeFilter === 'turnables' ? 'underline' : ''"
+                    @click="activeFilter = 'turnables'"
+                >
+                    Turnables
+                </button>
+                <button
+                    class="uppercase text-sm hover:text-[#555555]"
+                    :class="activeFilter === 'jewellery' ? 'underline' : ''"
+                    @click="activeFilter = 'jewellery'"
+                >
+                    Jewellery
+                </button>
+                <button
+                    class="uppercase text-sm hover:text-[#555555]"
+                    :class="activeFilter === 'pictures' ? 'underline' : ''"
+                    @click="activeFilter = 'pictures'"
+                >
+                    Pictures
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-item-center gap-10">
+                for _, works := range data.WorksData {
+                    <div
+                        class="col-span-1 flex flex-col hover:text-[#555555]"
+                        data-category={ works.Category }
+                        data-images-count={ strconv.Itoa(len(works.Images)) }
+                        x-show="activeFilter === 'all' || activeFilter === $el.dataset.category"
+                        x-data="{
+                            currentIndex: 0,
+                            totalImages: 0,
+                            init() {
+                                this.totalImages = parseInt($el.dataset.imagesCount);
+                                 if (this.totalImages > 1) {
+                                    this.autoAdvance()
+                                 }
+                            },
+                            autoAdvance() {
+                                this.intervalId = setInterval(() => {
+                                    if (this.currentIndex < this.totalImages - 1) {
+                                        this.currentIndex++;
+                                    } else {
+                                        this.currentIndex = 0;
+                                    }
+                                }, 5000);
                             }
-                        </div>
-                    <p class="text-start px-4 mt-2">{ works.Title }</p>
-                    </a>
-                </div>
-            }
+                        }"
+                    >
+                        <a href={ templ.URL(works.Href) } class="block">
+                            <div class="relative w-full h-64">
+                                for i, image := range works.Images {
+                                    <img x-show={ "currentIndex === " + strconv.Itoa(i) } class="absolute inset-0 object-contain w-full h-full" src={ image.Src } alt={ image.Alt } />
+                                }
+                            </div>
+                        <p class="text-start px-4 mt-2">{ works.Title }</p>
+                        </a>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 }
