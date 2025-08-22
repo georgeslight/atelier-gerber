@@ -45,16 +45,16 @@ templ WorksDetailPage(works model.Work) {
                     </div>
                 }
                 <!-- Left Navigation Area - cursor changes to left arrow -->
-                <div class="absolute left-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-left.png),_pointer]"
+                <div x-show="totalImages > 1" class="absolute left-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-left.png),_pointer]"
                      @click={ "currentIndex = currentIndex > 0 ? currentIndex - 1 : totalImages - 1; resetTimer()" }>
                 </div>
                 <!-- Right Navigation Area - cursor changes to right arrow -->
-                <div class="absolute right-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-right.png),_pointer]"
+                <div x-show="totalImages > 1" class="absolute right-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-right.png),_pointer]"
                      @click={ "currentIndex = currentIndex < totalImages - 1  ? currentIndex + 1 : 0; resetTimer()" }>
                 </div>
             </div>
             <!-- Dot Navigation -->
-            <div class="flex justify-center mt-4 space-x-2">
+            <div x-show="totalImages > 1" class="flex justify-center mt-4 space-x-2">
                 for i := range works.Images {
                     <button
                         @click={ "currentIndex = " + strconv.Itoa(i) }
