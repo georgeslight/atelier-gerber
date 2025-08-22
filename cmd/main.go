@@ -21,7 +21,7 @@ func main() {
 	http.HandleFunc("/exhibitions", exhibitionsHandler)
 	http.HandleFunc("/exhibitions/{id}", exhibitionDetailHandler)
 	http.HandleFunc("/works", worksHandler)
-	http.HandleFunc("/works/{id}", workDetailHandler)
+	http.HandleFunc("/works/{category}/{id}", workDetailHandler)
 	http.HandleFunc("/about", aboutHandler)
 	http.HandleFunc("/contact", contactHandler)
 
@@ -69,10 +69,26 @@ func worksHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func workDetailHandler(w http.ResponseWriter, r *http.Request) {
-	id := strings.TrimPrefix(r.URL.Path, "/works/")
+	path := strings.TrimPrefix(r.URL.Path, "/works/")
 
 	// Check for invalid ID first
-	if id == "" || id == r.URL.Path {
+	if path == "" || path == r.URL.Path {
+		http.NotFound(w, r)
+		return
+	}
+
+	// Split the path to get category and id
+	parts := strings.Split(path, "/")
+	if len(parts) != 2 {
+		http.NotFound(w, r)
+		return
+	}
+
+	category := parts[0]
+	id := parts[1]
+
+	// Check for empty category or id
+	if category == "" || id == "" {
 		http.NotFound(w, r)
 		return
 	}
