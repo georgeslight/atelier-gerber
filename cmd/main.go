@@ -30,7 +30,7 @@ func main() {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	homePage := pages.HomePage()
+	homePage := pages.HomePage(model.GetHomeData())
 	html := layouts.BaseLayout(homePage)
 	html.Render(r.Context(), w)
 }

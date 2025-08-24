@@ -1,5 +1,51 @@
 package pages
 
-templ HomePage() {
-    <h1 class="text-3xl font-bold text-[#007D9C]">Hello World From Home</h1>
+import (
+    "kristin-gerber/internal/model"
+    "strconv"
+)
+templ HomePage(data model.HomeData) {
+    <div class="w-screen h-screen"
+        x-data="{
+            currentIndex: 0,
+            totalImages: 0,
+            intervalId: null,
+            init() {
+                this.totalImages = parseInt($el.dataset.totalImages);
+                if (this.totalImages > 1) {
+                    this.autoAdvance()
+                }
+            },
+            autoAdvance() {
+            this.intervalId = setInterval(() => {
+                if (this.currentIndex < this.totalImages - 1) {
+                    this.currentIndex++;
+                } else {
+                    this.currentIndex = 0;
+                }
+            }, 5000);
+            },
+            resetTimer() {
+                if (this.intervalId) { clearInterval(this.intervalId); }
+                if (this.totalImages > 1) { this.autoAdvance(); }
+            }
+            }"
+            data-total-images={ strconv.Itoa(len(data.HomeImages)) }
+    >
+        for i, image := range data.HomeImages {
+            <div
+                x-show={ "currentIndex === " + strconv.Itoa(i) }
+            >
+                <img src={ image.Src } alt={ image.Alt } class="absolute inset-0 w-full h-full object-cover" />
+            </div>
+        }
+        <!-- Left Navigation Area - cursor changes to left arrow -->
+        <div x-show="totalImages > 1" class="absolute left-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-left.png),_pointer]"
+             @click={ "currentIndex = currentIndex > 0 ? currentIndex - 1 : totalImages - 1; resetTimer()" }>
+        </div>
+        <!-- Right Navigation Area - cursor changes to right arrow -->
+        <div x-show="totalImages > 1" class="absolute right-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-right.png),_pointer]"
+             @click={ "currentIndex = currentIndex < totalImages - 1  ? currentIndex + 1 : 0; resetTimer()" }>
+        </div>
+    </div>
 }
