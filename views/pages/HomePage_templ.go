@@ -34,7 +34,7 @@ func HomePage(data model.HomeData) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-screen h-screen\" x-data=\"{\n            currentIndex: 0,\n            totalImages: 0,\n            intervalId: null,\n            init() {\n                this.totalImages = parseInt($el.dataset.totalImages);\n                if (this.totalImages > 1) {\n                    this.autoAdvance()\n                }\n            },\n            autoAdvance() {\n            this.intervalId = setInterval(() => {\n                if (this.currentIndex < this.totalImages - 1) {\n                    this.currentIndex++;\n                } else {\n                    this.currentIndex = 0;\n                }\n            }, 5000);\n            },\n            resetTimer() {\n                if (this.intervalId) { clearInterval(this.intervalId); }\n                if (this.totalImages > 1) { this.autoAdvance(); }\n            }\n            }\" data-total-images=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-screen max-h-screen\" x-data=\"{\n            currentIndex: 0,\n            totalImages: 0,\n            intervalId: null,\n            init() {\n                this.totalImages = parseInt($el.dataset.totalImages);\n                if (this.totalImages > 1) {\n                    this.autoAdvance()\n                }\n            },\n            autoAdvance() {\n            this.intervalId = setInterval(() => {\n                if (this.currentIndex < this.totalImages - 1) {\n                    this.currentIndex++;\n                } else {\n                    this.currentIndex = 0;\n                }\n            }, 5000);\n            },\n            resetTimer() {\n                if (this.intervalId) { clearInterval(this.intervalId); }\n                if (this.totalImages > 1) { this.autoAdvance(); }\n            }\n            }\" data-total-images=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -96,7 +96,7 @@ func HomePage(data model.HomeData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<!-- Left Navigation Area - cursor changes to left arrow --><div x-show=\"totalImages > 1\" class=\"absolute left-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-left.png),_pointer]\" @click=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<!-- Left Navigation Area - cursor changes to left arrow --><div x-show=\"totalImages > 1\" class=\"absolute inset-0 left-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-left.png),_pointer]\" @click=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

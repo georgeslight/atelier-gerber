@@ -5,7 +5,7 @@ import (
     "strconv"
 )
 templ HomePage(data model.HomeData) {
-    <div class="w-screen h-screen"
+    <div class="w-screen max-h-screen"
         x-data="{
             currentIndex: 0,
             totalImages: 0,
@@ -40,7 +40,7 @@ templ HomePage(data model.HomeData) {
             </div>
         }
         <!-- Left Navigation Area - cursor changes to left arrow -->
-        <div x-show="totalImages > 1" class="absolute left-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-left.png),_pointer]"
+        <div x-show="totalImages > 1" class="absolute inset-0 left-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-left.png),_pointer]"
              @click={ "currentIndex = currentIndex > 0 ? currentIndex - 1 : totalImages - 1; resetTimer()" }>
         </div>
         <!-- Right Navigation Area - cursor changes to right arrow -->
