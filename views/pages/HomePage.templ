@@ -2,50 +2,45 @@ package pages
 
 import (
     "kristin-gerber/internal/model"
-    "strconv"
 )
+
 templ HomePage(data model.HomeData) {
-    <div class="w-screen max-h-screen"
+    <div
         x-data="{
-            currentIndex: 0,
-            totalImages: 0,
-            intervalId: null,
-            init() {
-                this.totalImages = parseInt($el.dataset.totalImages);
-                if (this.totalImages > 1) {
-                    this.autoAdvance()
+            scrollProgress: 0,
+            updateScroll() {
+                const container = $refs.scrollContainer;
+                const scrollTop = container.scrollTop;
+                const maxScroll = container.clientHeight;
+                if (maxScroll > 0) {
+                    this.scrollProgress = (scrollTop / maxScroll) * 100;
                 }
-            },
-            autoAdvance() {
-            this.intervalId = setInterval(() => {
-                if (this.currentIndex < this.totalImages - 1) {
-                    this.currentIndex++;
-                } else {
-                    this.currentIndex = 0;
-                }
-            }, 5000);
-            },
-            resetTimer() {
-                if (this.intervalId) { clearInterval(this.intervalId); }
-                if (this.totalImages > 1) { this.autoAdvance(); }
             }
-            }"
-            data-total-images={ strconv.Itoa(len(data.HomeImages)) }
+        }"
+        class="max-h-[calc(100vh-8rem-8rem)] w-full"
     >
-        for i, image := range data.HomeImages {
-            <div
-                x-show={ "currentIndex === " + strconv.Itoa(i) }
-            >
-                <img src={ image.Src } alt={ image.Alt } class="absolute inset-0 w-full h-full object-cover" />
+        <div
+            x-ref="scrollContainer"
+            @scroll="updateScroll()"
+            class="h-full overflow-y-auto overflow-x-hidden"
+        >
+            <!-- Content to enable scrolling -->
+            <div class="min-h-[500vh]">
+
+                <!-- Sticky gallery that moves horizontally -->
+                <div class="sticky top-0 h-full flex items-center">
+
+                    <div
+                        x-ref="images"
+                        class="flex items-center justify-center md:justify-start transition-transform duration-75 ease-out"
+                        :style="`transform: translateX(${-scrollProgress}%)`"
+                    >
+                        for _, image := range data.HomeImages {
+                            <img src={ image.Src } alt={ image.Alt } class="object-contain size-200 mx-8" />
+                        }
+                    </div>
+                </div>
             </div>
-        }
-        <!-- Left Navigation Area - cursor changes to left arrow -->
-        <div x-show="totalImages > 1" class="absolute inset-0 left-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-left.png),_pointer]"
-             @click={ "currentIndex = currentIndex > 0 ? currentIndex - 1 : totalImages - 1; resetTimer()" }>
-        </div>
-        <!-- Right Navigation Area - cursor changes to right arrow -->
-        <div x-show="totalImages > 1" class="absolute right-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-right.png),_pointer]"
-             @click={ "currentIndex = currentIndex < totalImages - 1  ? currentIndex + 1 : 0; resetTimer()" }>
         </div>
     </div>
 }
