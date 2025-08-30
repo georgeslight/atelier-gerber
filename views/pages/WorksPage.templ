@@ -5,7 +5,14 @@ import "strconv"
 
 templ WorksPage(data model.WorksData) {
     <div class="flex-1 h-full w-full">
-        <div class="container mx-auto" x-data="{ activeFilter: 'all' }">
+        <div class="container mx-auto"
+            x-data="{
+                activeFilter: localStorage.getItem('activeFilter') || 'all',
+                setFilter(filter) {
+                    this.activeFilter = filter;
+                    localStorage.setItem('activeFilter', filter);
+                }
+            }">
             <div class="flex justify-left gap-5 sm:gap-12 mb-8">
                 <button
                     class="uppercase text-sm hover:text-[#555555]"
