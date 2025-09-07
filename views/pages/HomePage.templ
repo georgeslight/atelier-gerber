@@ -36,7 +36,7 @@ templ HomePage(data model.HomeData) {
                         :style="`transform: translateX(${-scrollProgress}%)`"
                     >
                         for _, image := range data.HomeImages {
-                            <img src={ image.Src } alt={ image.Alt } class="object-contain size-200 mx-8" />
+                            <img src={ image.Src } alt={ image.Alt } class="object-contain h-200 mx-8" />
                         }
                     </div>
                 </div>
