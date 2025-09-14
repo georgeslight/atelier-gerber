@@ -35,6 +35,10 @@
           (templ system)
           air
           bun
+          gopls
+          delve
+          fswatch
+          tailwindcss-language-server
         ];
 
         shellHook = ''

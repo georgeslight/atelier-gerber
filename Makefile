@@ -108,6 +108,9 @@ tmp_dir = "build"\n\
 init: check-deps create-dirs setup-go setup-tailwind
 	@printf "\n$(CHECK) Project setup complete!\n"
 
+setup: check-deps setup-go setup-tailwind
+	@printf "\n$ (CHECK) Setup complete!\n"
+	
 check-deps:
 	@printf "\n$(CYAN)Checking dependencies$(RESET)\n"
 	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
@@ -203,5 +206,6 @@ help:
 	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
 	@printf "  make init$(RESET)          $(ARROW) Initialize project\n"
 	@printf "  make build$(RESET)         $(ARROW) Build project\n"
+	@printf "  make setup$(RESET)         $(ARROW) Setup project templ and tailwind\n"
 	@printf "  make watch$(RESET)         $(ARROW) Watch for changes\n"
 	@printf "  make serve$(RESET)         $(ARROW) Start server\n"
