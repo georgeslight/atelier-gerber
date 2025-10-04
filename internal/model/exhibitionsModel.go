@@ -29,37 +29,103 @@ func GetExhibitionsData() ExhibitionsData {
 	return ExhibitionsData{
 		Individual: []Exhibition{
 			{
-				ID:       "international-studio-program",
-				Title:    "International Studio Program (Winter 1978-1979)",
-				Location: "MoMA PS1, Long Island City, New York",
+				ID:       "moma",
+				Title:    "\"From Inside Out\", Lightroom, P.S.1 New York",
+				Location: "International Studio Program (Winter 1978-1979) - MoMA PS1, New York",
 				Date:     "1978 - 1979",
-				Href:     "/exhibitions/international-studio-program",
+				Href:     "/exhibitions/moma",
 				BaseImage: ExhibitionImage{
-					Src: "/static/images/exhibitions/moma/moma-01.jpg",
+					Src: "/static/images/exhibitions/moma/moma-00.jpg",
 					Alt: "MoMA PS1",
 				},
 				Details: ExhibitionDetails{
 					Images: []ExhibitionImage{
 						{
 							Src: "/static/images/exhibitions/moma/moma-01.jpg",
-							Alt: "MoMA detail 1",
+							Alt: "MoMA detail 01",
 						},
 						{
 							Src: "/static/images/exhibitions/moma/moma-02.jpg",
-							Alt: "MoMA detail 2",
+							Alt: "MoMA detail 02",
 						},
-
 						{
 							Src: "/static/images/exhibitions/moma/moma-03.jpg",
-							Alt: "MoMA detail 3",
+							Alt: "MoMA detail 03",
 						},
-
 						{
 							Src: "/static/images/exhibitions/moma/moma-04.jpg",
-							Alt: "MoMA detail 4",
+							Alt: "MoMA detail 04",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-05.jpg",
+							Alt: "MoMA detail 05",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-06.jpg",
+							Alt: "MoMA detail 06",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-07.jpg",
+							Alt: "MoMA detail 07",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-08.jpg",
+							Alt: "MoMA detail 08",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-09.jpg",
+							Alt: "MoMA detail 09",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-10.jpg",
+							Alt: "MoMA detail 10",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-11.jpg",
+							Alt: "MoMA detail 11",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-12.jpg",
+							Alt: "MoMA detail 12",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-13.jpg",
+							Alt: "MoMA detail 13",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-14.jpg",
+							Alt: "MoMA detail 14",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-15.jpg",
+							Alt: "MoMA detail 15",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-16.jpg",
+							Alt: "MoMA detail 16",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-17.jpg",
+							Alt: "MoMA detail 17",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-18.jpg",
+							Alt: "MoMA detail 18",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-19.jpg",
+							Alt: "MoMA detail 19",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-20.jpg",
+							Alt: "MoMA detail 20",
+						},
+						{
+							Src: "/static/images/exhibitions/moma/moma-21.jpg",
+							Alt: "MoMA detail 21",
 						},
 					},
-					Description: "December 3, 1978 - Januray 1979. MoMA PS1.\nInternational Studio Program at The Museum of Modern Art, New Tork",
+					Description: "48.000 Coffe Cups, String 2,1 Miles Long.\n\nKristin Gerber's Open Studio Exhibition is sponsored by the Institude for Art and\nUrban Resources' International Comitee with the support of the City of West\nBerlin, DADD.\n\nP.S.1, a Center for the Experimental Arts, is a project of the Institude for Art\nand Urban Resources, Inc., and is supported in part by the New York State\nCouncil on the Arts and the National Endowment for the Arts.\n\nP.S.1 (Project Studios One)\n46-01 21st Street\nLong Island City, Queens, NY 11101",
 				},
 			},
 			// {
