@@ -17,7 +17,7 @@ templ HomePage(data model.HomeData) {
                 }
             }
         }"
-        class="max-h-[calc(100vh-8rem-8rem)] w-full"
+        class="fixed inset-0 w-screen h-screen py-32"
     >
         <div
             x-ref="scrollContainer"
@@ -32,11 +32,11 @@ templ HomePage(data model.HomeData) {
 
                     <div
                         x-ref="images"
-                        class="flex items-center justify-center md:justify-start transition-transform duration-75 ease-out"
+                        class="flex items-center justify-center md:justify-start transition-transform duration-75 ease-out w-auto h-full"
                         :style="`transform: translateX(${-scrollProgress}%)`"
                     >
                         for _, image := range data.HomeImages {
-                            <img src={ image.Src } alt={ image.Alt } class="object-contain h-200 mx-8" />
+                            <img src={ image.Src } alt={ image.Alt } class="object-contain h-full w-auto mx-12" />
                         }
                     </div>
                 </div>

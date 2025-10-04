@@ -33,7 +33,7 @@ func HomePage(data model.HomeData) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div x-data=\"{\n            scrollProgress: 0,\n            updateScroll() {\n                const container = $refs.scrollContainer;\n                const scrollTop = container.scrollTop;\n                const maxScroll = container.clientHeight;\n                if (maxScroll > 0) {\n                    this.scrollProgress = (scrollTop / maxScroll) * 100;\n                }\n            }\n        }\" class=\"max-h-[calc(100vh-8rem-8rem)] w-full\"><div x-ref=\"scrollContainer\" @scroll=\"updateScroll()\" class=\"h-full overflow-y-auto overflow-x-hidden\"><!-- Content to enable scrolling --><div class=\"min-h-[500vh]\"><!-- Sticky gallery that moves horizontally --><div class=\"sticky top-0 h-full flex items-center\"><div x-ref=\"images\" class=\"flex items-center justify-center md:justify-start transition-transform duration-75 ease-out\" :style=\"`transform: translateX(${-scrollProgress}%)`\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div x-data=\"{\n            scrollProgress: 0,\n            updateScroll() {\n                const container = $refs.scrollContainer;\n                const scrollTop = container.scrollTop;\n                const maxScroll = container.clientHeight;\n                if (maxScroll > 0) {\n                    this.scrollProgress = (scrollTop / maxScroll) * 100;\n                }\n            }\n        }\" class=\"fixed inset-0 w-screen h-screen py-32\"><div x-ref=\"scrollContainer\" @scroll=\"updateScroll()\" class=\"h-full overflow-y-auto overflow-x-hidden\"><!-- Content to enable scrolling --><div class=\"min-h-[500vh]\"><!-- Sticky gallery that moves horizontally --><div class=\"sticky top-0 h-full flex items-center\"><div x-ref=\"images\" class=\"flex items-center justify-center md:justify-start transition-transform duration-75 ease-out w-auto h-full\" :style=\"`transform: translateX(${-scrollProgress}%)`\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -64,7 +64,7 @@ func HomePage(data model.HomeData) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\" class=\"object-contain h-200 mx-8\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\" class=\"object-contain h-full w-auto mx-12\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
