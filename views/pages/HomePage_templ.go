@@ -33,7 +33,7 @@ func HomePage(data model.HomeData) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div x-data=\"{\n            scrollProgress: 0,\n            updateScroll() {\n                const container = $refs.scrollContainer;\n                const scrollTop = container.scrollTop;\n                const maxScroll = container.clientHeight;\n                if (maxScroll > 0) {\n                    this.scrollProgress = (scrollTop / maxScroll) * 100;\n                }\n            }\n        }\" class=\"fixed inset-0 w-screen h-screen py-32\"><div x-ref=\"scrollContainer\" @scroll=\"updateScroll()\" class=\"h-full overflow-y-auto overflow-x-hidden\"><!-- Content to enable scrolling --><div class=\"min-h-[500vh]\"><!-- Sticky gallery that moves horizontally --><div class=\"sticky top-0 h-full flex items-center\"><div x-ref=\"images\" class=\"flex items-center justify-center md:justify-start transition-transform duration-75 ease-out w-auto h-full\" :style=\"`transform: translateX(${-scrollProgress}%)`\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div x-data=\"{\n            scrollProgress: 0,\n            updateScroll() {\n                const container = $refs.scrollContainer;\n                const scrollTop = container.scrollTop;\n                const maxScroll = container.clientHeight;\n                if (maxScroll > 0) {\n                    this.scrollProgress = (scrollTop / maxScroll) * 100;\n                }\n            }\n        }\" class=\"fixed inset-0 w-screen h-screen py-32\"><div x-ref=\"scrollContainer\" @scroll=\"updateScroll()\" class=\"h-full overflow-y-auto overflow-x-hidden\"><div x-ref=\"images\" class=\"flex items-center justify-center md:justify-start transition-transform duration-75 ease-out w-auto h-full\" :style=\"`transform: translateX(${-scrollProgress}%)`\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -45,7 +45,7 @@ func HomePage(data model.HomeData) templ.Component {
 			var templ_7745c5c3_Var2 string
 			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(image.Src)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/HomePage.templ`, Line: 39, Col: 48}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/HomePage.templ`, Line: 34, Col: 48}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 			if templ_7745c5c3_Err != nil {
@@ -58,7 +58,7 @@ func HomePage(data model.HomeData) templ.Component {
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(image.Alt)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/HomePage.templ`, Line: 39, Col: 66}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/HomePage.templ`, Line: 34, Col: 66}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -69,7 +69,7 @@ func HomePage(data model.HomeData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></div></div></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -24,11 +24,6 @@ templ HomePage(data model.HomeData) {
             @scroll="updateScroll()"
             class="h-full overflow-y-auto overflow-x-hidden"
         >
-            <!-- Content to enable scrolling -->
-            <div class="min-h-[500vh]">
-
-                <!-- Sticky gallery that moves horizontally -->
-                <div class="sticky top-0 h-full flex items-center">
 
                     <div
                         x-ref="images"
@@ -39,8 +34,6 @@ templ HomePage(data model.HomeData) {
                             <img src={ image.Src } alt={ image.Alt } class="object-contain h-full w-auto mx-12" />
                         }
                     </div>
-                </div>
-            </div>
         </div>
     </div>
 }
