@@ -1,39 +1,31 @@
 package pages
 
-import (
-    "kristin-gerber/internal/model"
-)
+import "kristin-gerber/internal/model"
 
 templ HomePage(data model.HomeData) {
-    <div
-        x-data="{
-            scrollProgress: 0,
-            updateScroll() {
-                const container = $refs.scrollContainer;
-                const scrollTop = container.scrollTop;
-                const maxScroll = container.clientHeight;
-                if (maxScroll > 0) {
-                    this.scrollProgress = (scrollTop / maxScroll) * 100;
-                }
-            }
-        }"
-        class="fixed inset-0 w-screen h-screen py-32"
-    >
-        <div
-            x-ref="scrollContainer"
-            @scroll="updateScroll()"
-            class="h-full overflow-y-auto overflow-x-hidden"
-        >
-
-                    <div
-                        x-ref="images"
-                        class="flex items-center justify-center md:justify-start transition-transform duration-75 ease-out w-auto h-full"
-                        :style="`transform: translateX(${-scrollProgress}%)`"
-                    >
-                        for _, image := range data.HomeImages {
-                            <img src={ image.Src } alt={ image.Alt } class="object-contain h-full w-auto mx-12" />
-                        }
-                    </div>
-        </div>
-    </div>
+	<div>
+		<div class="w-full bg-[#C9D0DF] py-24">
+			<div class="container mx-auto max-w-[1000px] w-full">
+				<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 mx-12">
+					<div class="md:col-span-1 flex justify-center items-center w-[50%] md:w-full mx-auto">
+						<div class="relative w-full aspect-square max-w-[300px]">
+							<img src="/static/images/kristin.jpg" alt="Kristin Gerber" class="w-full h-full object-contain border-4 border-white shadow-lg shadow-gray-500"/>
+						</div>
+					</div>
+					<div class="md:col-span-2 lg:col-span-3 text-left tracking-wide">
+						<p class="whitespace-pre-line">
+							<b>Kristin Gerber</b> is a visual artist with a distinguished international career spanning over sixty years. Her practice, encompassing painting, etching, and visual objects, has been developed across Santiago de Chile, Paris, Munich, Berlin, London, and New York.
+							<br/>
+							<br/>
+							Her extensive training includes studies at the Escuela de Bellas Artes in Chile, the École Nationale des Beaux Arts in Paris, and specialized work in etching at the renowned Atelier 17. Gerber's work has been featured in significant exhibitions like the Paris Biennale and at venues in New York, Helsinki, and Berlin, supported by prestigious scholarships from the British Council and the DAAD.
+							<br/>
+							<br/>
+							Complementing her artistic output, Gerber has been a dedicated educator since 1970, teaching design and jewelry making in Berlin and serving as a guest lecturer at the University of Arts Berlin. Her career reflects a sustained commitment to both creating and teaching art on a global stage.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		@HomeGallery(data)
+	</div>
 }

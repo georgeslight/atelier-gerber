@@ -8,9 +8,7 @@ package pages
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import (
-	"kristin-gerber/internal/model"
-)
+import "kristin-gerber/internal/model"
 
 func HomePage(data model.HomeData) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -33,43 +31,15 @@ func HomePage(data model.HomeData) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div x-data=\"{\n            scrollProgress: 0,\n            updateScroll() {\n                const container = $refs.scrollContainer;\n                const scrollTop = container.scrollTop;\n                const maxScroll = container.clientHeight;\n                if (maxScroll > 0) {\n                    this.scrollProgress = (scrollTop / maxScroll) * 100;\n                }\n            }\n        }\" class=\"fixed inset-0 w-screen h-screen py-32\"><div x-ref=\"scrollContainer\" @scroll=\"updateScroll()\" class=\"h-full overflow-y-auto overflow-x-hidden\"><div x-ref=\"images\" class=\"flex items-center justify-center md:justify-start transition-transform duration-75 ease-out w-auto h-full\" :style=\"`transform: translateX(${-scrollProgress}%)`\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div><div class=\"w-full bg-[#C9D0DF] py-24\"><div class=\"container mx-auto max-w-[1000px] w-full\"><div class=\"grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 mx-12\"><div class=\"md:col-span-1 flex justify-center items-center w-[50%] md:w-full mx-auto\"><div class=\"relative w-full aspect-square max-w-[300px]\"><img src=\"/static/images/kristin.jpg\" alt=\"Kristin Gerber\" class=\"w-full h-full object-contain border-4 border-white shadow-lg shadow-gray-500\"></div></div><div class=\"md:col-span-2 lg:col-span-3 text-left tracking-wide\"><p class=\"whitespace-pre-line\"><b>Kristin Gerber</b> is a visual artist with a distinguished international career spanning over sixty years. Her practice, encompassing painting, etching, and visual objects, has been developed across Santiago de Chile, Paris, Munich, Berlin, London, and New York.<br><br>Her extensive training includes studies at the Escuela de Bellas Artes in Chile, the École Nationale des Beaux Arts in Paris, and specialized work in etching at the renowned Atelier 17. Gerber's work has been featured in significant exhibitions like the Paris Biennale and at venues in New York, Helsinki, and Berlin, supported by prestigious scholarships from the British Council and the DAAD.<br><br>Complementing her artistic output, Gerber has been a dedicated educator since 1970, teaching design and jewelry making in Berlin and serving as a guest lecturer at the University of Arts Berlin. Her career reflects a sustained commitment to both creating and teaching art on a global stage.</p></div></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		for _, image := range data.HomeImages {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<img src=\"")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			var templ_7745c5c3_Var2 string
-			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(image.Src)
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/HomePage.templ`, Line: 34, Col: 48}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" alt=\"")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			var templ_7745c5c3_Var3 string
-			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(image.Alt)
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/HomePage.templ`, Line: 34, Col: 66}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\" class=\"object-contain h-full w-auto mx-12\">")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
+		templ_7745c5c3_Err = HomeGallery(data).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -22,7 +22,7 @@ func main() {
 	http.HandleFunc("/exhibitions/{id}", exhibitionDetailHandler)
 	http.HandleFunc("/works", worksHandler)
 	http.HandleFunc("/works/{category}/{id}", workDetailHandler)
-	http.HandleFunc("/about", aboutHandler)
+	// http.HandleFunc("/about", aboutHandler)
 	http.HandleFunc("/contact", contactHandler)
 
 	fmt.Println("Listening on :3000")
@@ -105,11 +105,11 @@ func workDetailHandler(w http.ResponseWriter, r *http.Request) {
 	html.Render(r.Context(), w)
 }
 
-func aboutHandler(w http.ResponseWriter, r *http.Request) {
-	aboutPage := pages.AboutPage()
-	html := layouts.BaseLayout(aboutPage)
-	html.Render(r.Context(), w)
-}
+// func aboutHandler(w http.ResponseWriter, r *http.Request) {
+// 	aboutPage := pages.AboutPage()
+// 	html := layouts.BaseLayout(aboutPage)
+// 	html.Render(r.Context(), w)
+// }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
 	contactPage := pages.ContactPage()
