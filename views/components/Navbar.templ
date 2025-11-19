@@ -3,15 +3,15 @@ package components
 templ Navbar() {
     <div x-data="{ currentPage: window.location.pathname, mobileMenuOpen: false }" class="flex items-start w-full mb-12 md:rpy-4 z-[100]">
         <!-- Desktop Navigation -->
-        <div id="navbar" class="w-full flex items-center justify-between mx-auto">
+        <div id="navbar" class="max-w-[1500px] w-full flex items-center justify-between mx-auto">
             <div id="nav-left" class="flex items-center">
                 <a class="text-2xl md:text-3xl tracking-wide font-medium" href="/">Kristin Gerber</a>
             </div>
 
             <div id="nav-right" class="hidden md:flex justify-between items-end h-full uppercase space-x-16 font-medium">
-                <a href="/exhibitions" class="tracking-wide hover:text-[#555555]" :class="{ 'underline': currentPage === '/exhibitions' }">Exhibitions</a>
+                <a href="/" class="tracking-wide hover:text-[#555555]" :class="{ 'underline': currentPage === '/' }">Home</a>
                 <a href="/works" class="tracking-wide hover:text-[#555555]" :class="{ 'underline': currentPage === '/works' }">Works</a>
-                <a href="/about" class="tracking-wide hover:text-[#555555]" :class="{ 'underline': currentPage === '/about' }">About</a>
+                <a href="/exhibitions" class="tracking-wide hover:text-[#555555]" :class="{ 'underline': currentPage === '/exhibitions' }">Exhibitions</a>
                 <a href="/contact" class="tracking-wide hover:text-[#555555]" :class="{ 'underline': currentPage === '/contact' }">Contact</a>
             </div>
 
@@ -41,11 +41,11 @@ templ Navbar() {
 
             <!-- Sidebar Navigation -->
             <div class="flex flex-col p-6 space-y-6 uppercase">
-                <a href="/exhibitions"
+                <a href="/home"
                    @click="mobileMenuOpen = false"
                    class="tracking-wide hover:text-[#555555] py-2 text-lg border-b border-gray-200"
-                   :class="{ 'underline': currentPage === '/exhibitions' }">
-                   Exhibitions
+                   :class="{ 'underline': currentPage === '/' }">
+                   Home
                 </a>
                 <a href="/works"
                    @click="mobileMenuOpen = false"
@@ -53,11 +53,11 @@ templ Navbar() {
                    :class="{ 'underline': currentPage === '/works' }">
                    Works
                 </a>
-                <a href="/about"
+                <a href="/exhibitions"
                    @click="mobileMenuOpen = false"
                    class="tracking-wide hover:text-[#555555] py-2 text-lg border-b border-gray-200"
-                   :class="{ 'underline': currentPage === '/about' }">
-                   About
+                   :class="{ 'underline': currentPage === '/exhibitions' }">
+                   Exhibitions
                 </a>
                 <a href="/contact"
                    @click="mobileMenuOpen = false"
