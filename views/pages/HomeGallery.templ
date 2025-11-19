@@ -1,0 +1,55 @@
+package pages
+
+import "kristin-gerber/internal/model"
+
+templ HomeGallery(data model.HomeData) {
+	<div class="h-full w-full py-24">
+		<div class="container mx-auto max-w-[1500px]">
+			<!-- Row 1 -->
+			<div class="grid grid-cols-12 gap-0 h-full">
+				// Image 1
+				<div class="h-full overflow-hidden col-span-3">
+					<img src={ data.HomeImages[3].Src } alt={ data.HomeImages[3].Alt } class="w-full h-full object-cover"/>
+				</div>
+				// Image 2
+				<div class="h-full overflow-hidden col-span-4">
+					<img src={ data.HomeImages[0].Src } alt={ data.HomeImages[0].Alt } class="w-full h-full object-cover"/>
+				</div>
+				// Image 3
+				<div class="h-full overflow-hidden col-span-4">
+				 <img src={ data.HomeImages[4].Src } alt={ data.HomeImages[4].Alt } class="w-full h-full object-cover"/>
+				</div>
+			</div>
+			<!-- Row 2 -->
+			<div class="grid grid-cols-12 gap-0 h-full">
+				// Image 4
+				<div class="h-full overflow-hidden col-span-4">
+					<img src={ data.HomeImages[0].Src } alt={ data.HomeImages[0].Alt } class="w-full h-full object-cover"/>
+				</div>
+				// Image 5
+				<div class="h-full overflow-hidden col-span-4">
+				 <img src={ data.HomeImages[4].Src } alt={ data.HomeImages[4].Alt } class="w-full h-full object-cover"/>
+				</div>
+				// Image 6
+				<div class="h-full overflow-hidden col-span-3">
+					<img src={ data.HomeImages[3].Src } alt={ data.HomeImages[3].Alt } class="w-full h-full object-cover"/>
+				</div>
+			</div>
+			<!-- Row 3 -->
+			<div class="grid grid-cols-12 gap-0 h-full">
+				// Image 7
+				<div class="h-full overflow-hidden col-span-4">
+				 <img src={ data.HomeImages[4].Src } alt={ data.HomeImages[4].Alt } class="w-full h-full object-cover"/>
+				</div>
+				// Image 8
+				<div class="h-full overflow-hidden col-span-3">
+					<img src={ data.HomeImages[3].Src } alt={ data.HomeImages[3].Alt } class="w-full h-full object-cover"/>
+				</div>
+				// Image 9
+				<div class="h-full overflow-hidden col-span-4">
+					<img src={ data.HomeImages[0].Src } alt={ data.HomeImages[0].Alt } class="w-full h-full object-cover"/>
+				</div>
+			</div>
+		</div>
+	</div>
+}

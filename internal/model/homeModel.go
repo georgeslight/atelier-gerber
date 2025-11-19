@@ -18,26 +18,26 @@ func GetHomeData() HomeData {
 				Src: "/static/images/home/kristin-01.jpg",
 				Alt: "Home Image 01",
 			},
-			// {
-			// 	ID:  "home2",
-			// 	Src: "/static/images/home/b002.jpg",
-			// 	Alt: "Home Image 02",
-			// },
-			// {
-			// 	ID:  "home3",
-			// 	Src: "/static/images/home/b003.jpg",
-			// 	Alt: "Home Image 03",
-			// },
-			// {
-			// 	ID:  "home4",
-			// 	Src: "/static/images/home/b004.jpg",
-			// 	Alt: "Home Image 04",
-			// },
-			// {
-			// 	ID:  "home6",
-			// 	Src: "/static/images/home/b006.jpg",
-			// 	Alt: "Home Image 06",
-			// },
+			{
+				ID:  "home2",
+				Src: "/static/images/home/kristin-02.jpg",
+				Alt: "Home Image 02",
+			},
+			{
+				ID:  "home3",
+				Src: "/static/images/home/kristin-03.jpg",
+				Alt: "Home Image 03",
+			},
+			{
+				ID:  "home4",
+				Src: "/static/images/home/kristin-04.jpg",
+				Alt: "Home Image 04",
+			},
+			{
+				ID:  "home5",
+				Src: "/static/images/home/kristin-05.jpg",
+				Alt: "Home Image 05",
+			},
 			// {
 			// 	ID:  "home7",
 			// 	Src: "/static/images/home/b007.jpg",

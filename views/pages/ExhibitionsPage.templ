@@ -3,41 +3,42 @@ package pages
 import "kristin-gerber/internal/model"
 
 templ ExhibitionPage(data model.ExhibitionsData) {
-    <div class="w-full">
-        if len(data.Individual) > 0 {
-            <h3 class="uppercase mb-8">Individual Exhibitions</h3>
-            for _, individual := range data.Individual {
-                <div class="md:mb-12">
-                    <a class="flex flex-col grid grid-cols-1 md:grid md:grid-cols-3 gap-4 hover:text-[#555555]" href={ templ.URL(individual.Href) }>
-                        <img src={ individual.BaseImage.Src } alt={ individual.BaseImage.Alt } class="w-full md:col-span-2 md:pr-4" />
-                        <div class="mb-12 md:mb-0 md:pl-4">
-                            <div class="flex flex-col">
-                                <h2>{ individual.Title }</h2>
-                                <p>{ individual.Location }</p>
-                                <time>{ individual.Date }</time>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            }
-        }
-
-        if len(data.Group) > 0 {
-            <h3 class="uppercase mb-8">Group Exhibitions</h3>
-            for _, group := range data.Group {
-                <div class="md:mb-12">
-                    <a class="flex flex-col grid grid-cols-1 md:grid md:grid-cols-3 gap-4 hover:text-[#555555]" href={ templ.URL(group.Href) }>
-                        <img src={ group.BaseImage.Src } alt={ group.BaseImage.Alt } class="w-full md:col-span-2 md:pr-4" />
-                        <div class="mb-12 md:mb-0 md:pl-4">
-                            <div class="flex flex-col">
-                                <h2>{ group.Title }</h2>
-                                <p>{ group.Location }</p>
-                                <time>{ group.Date }</time>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            }
-        }
-    </div>
+	<div class="w-full">
+		<div class="max-w-[1500px] mx-auto">
+			if len(data.Individual) > 0 {
+				<h3 class="uppercase mb-8">Individual Exhibitions</h3>
+				for _, individual := range data.Individual {
+					<div class="md:mb-12">
+						<a class="flex flex-col grid grid-cols-1 md:grid md:grid-cols-3 gap-4 hover:text-[#555555]" href={ templ.URL(individual.Href) }>
+							<img src={ individual.BaseImage.Src } alt={ individual.BaseImage.Alt } class="w-full md:col-span-2 md:pr-4"/>
+							<div class="mb-12 md:mb-0 md:pl-4">
+								<div class="flex flex-col">
+									<h2>{ individual.Title }</h2>
+									<p>{ individual.Location }</p>
+									<time>{ individual.Date }</time>
+								</div>
+							</div>
+						</a>
+					</div>
+				}
+			}
+			if len(data.Group) > 0 {
+				<h3 class="uppercase mb-8">Group Exhibitions</h3>
+				for _, group := range data.Group {
+					<div class="md:mb-12">
+						<a class="flex flex-col grid grid-cols-1 md:grid md:grid-cols-3 gap-4 hover:text-[#555555]" href={ templ.URL(group.Href) }>
+							<img src={ group.BaseImage.Src } alt={ group.BaseImage.Alt } class="w-full md:col-span-2 md:pr-4"/>
+							<div class="mb-12 md:mb-0 md:pl-4">
+								<div class="flex flex-col">
+									<h2>{ group.Title }</h2>
+									<p>{ group.Location }</p>
+									<time>{ group.Date }</time>
+								</div>
+							</div>
+						</a>
+					</div>
+				}
+			}
+		</div>
+	</div>
 }

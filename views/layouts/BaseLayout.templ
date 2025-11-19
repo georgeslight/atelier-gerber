@@ -6,7 +6,7 @@ import (
 
 templ BaseLayout(page templ.Component) {
 	<!DOCTYPE html>
-	<html lang="de" class="h-full font-[Karla] tracking-wide">
+	<html lang="de" class="h-full font-[Monserrat, sans-serif] tracking-wide text-[#23434c]">
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -16,9 +16,9 @@ templ BaseLayout(page templ.Component) {
 			// AlpineJS
 			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 		</head>
-		<body class="h-full flex flex-col max-w-[1500px] w-full mx-auto px-8 pt-8">
+		<body class="h-full flex flex-col w-full mx-auto pt-8">
 		    @components.Navbar()
-		    <div class="flex-1 w-full flex">
+		    <div class="flex-1 w-full">
                 @page
 		    </div>
             @components.Footer()

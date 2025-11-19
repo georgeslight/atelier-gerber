@@ -5,7 +5,7 @@ import "strconv"
 
 templ WorksPage(data model.WorksData) {
     <div class="flex-1 h-full w-full">
-        <div class="container mx-auto"
+        <div class="container mx-auto max-w-[1500px]"
             x-data="{
                 activeFilter: localStorage.getItem('activeFilter') || 'all',
                 setFilter(filter) {
@@ -28,13 +28,13 @@ templ WorksPage(data model.WorksData) {
                 >
                     Turnables
                 </button>
-                <button
-                    class="uppercase text-sm hover:text-[#555555]"
-                    :class="activeFilter === 'jewellery' ? 'underline' : ''"
-                    @click="activeFilter = 'jewellery'"
-                >
-                    Jewellery
-                </button>
+                // <button
+                //     class="uppercase text-sm hover:text-[#555555]"
+                //     :class="activeFilter === 'jewellery' ? 'underline' : ''"
+                //     @click="activeFilter = 'jewellery'"
+                // >
+                //     Jewellery
+                // </button>
                 <button
                     class="uppercase text-sm hover:text-[#555555]"
                     :class="activeFilter === 'pictures' ? 'underline' : ''"
@@ -44,7 +44,7 @@ templ WorksPage(data model.WorksData) {
                 </button>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-item-center gap-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-item-center gap-10">
                 for _, works := range data.WorksData {
                     <div
                         class="col-span-1 flex flex-col hover:text-[#555555]"
