@@ -24,6 +24,7 @@ func main() {
 	http.HandleFunc("/works/{category}/{id}", workDetailHandler)
 	// http.HandleFunc("/about", aboutHandler)
 	http.HandleFunc("/contact", contactHandler)
+	// http.HandleFunc("/modal", modalHandler)
 
 	fmt.Println("Listening on :3000")
 	http.ListenAndServe(":3000", nil)
@@ -108,6 +109,12 @@ func workDetailHandler(w http.ResponseWriter, r *http.Request) {
 // func aboutHandler(w http.ResponseWriter, r *http.Request) {
 // 	aboutPage := pages.AboutPage()
 // 	html := layouts.BaseLayout(aboutPage)
+// 	html.Render(r.Context(), w)
+// }
+
+// func modalHandler(w http.ResponseWriter, r *http.Request) {
+// 	modalPage := pages.ExhibitionsModal(model.GetExhibitionsData().Individual[0])
+// 	html := layouts.BaseLayout(modalPage)
 // 	html.Render(r.Context(), w)
 // }
 
