@@ -36,6 +36,8 @@
           air
           bun
           fswatch
+          montserrat
+          zsh
           # gopls
           # delve
           # tailwindcss-language-server
@@ -43,6 +45,7 @@
 
         shellHook = ''
           make help
+          exec zsh
         '';
       }
     );
