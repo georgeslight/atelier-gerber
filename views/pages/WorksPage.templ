@@ -10,7 +10,7 @@ templ WorksPage(data model.WorksData) {
 		<div
 			class="container mx-auto max-w-[1500px]"
 			x-data="{
-activeFilter: localStorage.getItem('activeFilter') || 'all',
+								activeFilter: localStorage.getItem('activeFilter') || 'all',
                 setFilter(filter) {
                     this.activeFilter = filter;
                     localStorage.setItem('activeFilter', filter);
@@ -67,24 +67,24 @@ activeFilter: localStorage.getItem('activeFilter') || 'all',
 						data-images-count={ strconv.Itoa(len(works.Images)) }
 						x-show="activeFilter === 'all' || activeFilter === $el.dataset.category"
 						x-data="{
-        currentIndex: 0,
-        totalImages: 0,
-        init() {
-            this.totalImages = parseInt($el.dataset.imagesCount);
-            if (this.totalImages > 1) {
-                this.autoAdvance()
-            }
-        },
-        autoAdvance() {
-            this.intervalId = setInterval(() => {
-                if (this.currentIndex < this.totalImages - 1) {
-                    this.currentIndex++;
-                } else {
-                    this.currentIndex = 0;
-                }
-            }, 5000);
-        }
-    }"
+			        currentIndex: 0,
+			        totalImages: 0,
+			        init() {
+			            this.totalImages = parseInt($el.dataset.imagesCount);
+			            if (this.totalImages > 1) {
+			                this.autoAdvance()
+			            }
+			        },
+			        autoAdvance() {
+			            this.intervalId = setInterval(() => {
+			                if (this.currentIndex < this.totalImages - 1) {
+			                    this.currentIndex++;
+			                } else {
+			                    this.currentIndex = 0;
+			                }
+			            }, 5000);
+			        }
+			    }"
 					>
 						<button
 							class="block"
