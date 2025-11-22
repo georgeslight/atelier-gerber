@@ -79,6 +79,7 @@ templ ExhibitionPage(data model.ExhibitionsData) {
 		</div>
 		// Overlay
 		<div
+			x-cloak
 			x-show="showModal"
 			x-transition:enter="transition ease-out duration-300"
 			x-transition:enter-start="opacity-0"
