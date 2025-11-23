@@ -3,10 +3,10 @@ package pages
 import "kristin-gerber/internal/model"
 
 templ HomeGallery(data model.HomeData) {
-	<div class="h-full w-full py-24 px-8">
+	<div class="h-full w-full py-24 px-4">
 		<div class="container mx-auto">
 			<!-- Row 1 -->
-			<div class="grid grid-flow-col grid-rows-4 md:grid-rows-2 gap-1 h-full w-full">
+			<div class="grid grid-flow-col grid-rows-4 md:grid-rows-2 gap-4 md:gap-1 h-full w-full">
 				// Image 1
 				<div class="h-full overflow-hidden col-span-1 col-start-1 row-span-1 row-start-1">
 					<img src={ data.HomeImages[0].Src } alt={ data.HomeImages[0].Alt } class="w-full h-full object-cover"/>
