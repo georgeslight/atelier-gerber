@@ -38,6 +38,7 @@
           fswatch
           montserrat
           zsh
+          flyctl
           # gopls
           # delve
           # tailwindcss-language-server
