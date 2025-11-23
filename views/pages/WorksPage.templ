@@ -115,7 +115,7 @@ templ WorksPage(data model.WorksData) {
 				@keydown.escape="closeModal()"
 			>
 				<div
-					class="w-full max-w-[1500px] mx-auto relative z-[1000] text-[#C9D0DF] p-6 rounded-lg max-h-[90vh] overflow-y-auto"
+					class="w-full max-w-[1500px] mx-auto relative z-[1000] text-[#C9D0DF] p-6 rounded-lg max-h-[90vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
 					@click.stop
 				>
 					<template x-if="currentWork">
