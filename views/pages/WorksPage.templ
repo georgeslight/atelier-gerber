@@ -96,7 +96,7 @@ templ WorksPage(data model.WorksData) {
 									<img x-show={ "currentIndex === " + strconv.Itoa(i) } class="absolute inset-0 object-contain w-full h-full border-4 border-[#C9D0DF] shadow-md p-2 shadow-[#C9D0DF]" src={ image.Src } alt={ image.Alt }/>
 								}
 							</div>
-							<p class="text-center px-4 mt-2 font-[Makawao]">{ works.Title }</p>
+							<p class="text-center px-4 mt-2 uppercase">{ works.Title }</p>
 						</button>
 					</div>
 				}
