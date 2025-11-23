@@ -106,11 +106,10 @@ templ ExhibitionPage(data model.ExhibitionsData) {
 								</svg>
 							</button>
 						</div>
-						<div>
-							<h2 x-text="currentExhibition.title"></h2>
-							<h2 x-text="currentExhibition.location"></h2>
-						</div>
-						<!-- Add the rest of your modal content using x-text bindings -->
+						// <div>
+						// 	<h2 x-text="currentExhibition.title"></h2>
+						// 	<h2 x-text="currentExhibition.location"></h2>
+						// </div>
 						<div
 							class="my-8"
 							x-data="{
@@ -166,8 +165,9 @@ templ ExhibitionPage(data model.ExhibitionsData) {
 										></button>
 									</template>
 								</div>
-								<div class="uppercase tracking-wide">
-									<h2 x-text="currentExhibition.title"></h2>
+								<div class="tracking-wide pt-16">
+									<h2 class="uppercase " x-text="currentExhibition.title"></h2>
+									<h2 x-text="currentExhibition.location"></h2>
 								</div>
 								<div class="grid md:grid-cols-6">
 									<p class="col-span-5 whitespace-pre-line my-4" x-text="currentExhibition.details.description"></p>
