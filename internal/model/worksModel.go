@@ -249,14 +249,14 @@ func GetWorksData() WorksData {
 				Href:        "/works/pictures/b021",
 				Description: "",
 			},
-			{
-				ID:          "b022",
-				Title:       "",
-				Category:    "pictures",
-				Images:      []WorksImage{{Src: "/static/images/works/pictures/b022.jpg", Alt: ""}},
-				Href:        "/works/pictures/b022",
-				Description: "",
-			},
+			// {
+			// 	ID:          "b022",
+			// 	Title:       "",
+			// 	Category:    "pictures",
+			// 	Images:      []WorksImage{{Src: "/static/images/works/pictures/b022.jpg", Alt: ""}},
+			// 	Href:        "/works/pictures/b022",
+			// 	Description: "",
+			// },
 			{
 				ID:          "b023",
 				Title:       "",
