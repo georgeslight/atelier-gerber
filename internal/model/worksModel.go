@@ -16,6 +16,7 @@ type Work struct {
 	Images      []WorksImage `json:"image"`
 	Href        string       `json:"href"`
 	Description string       `json:"description"`
+	Sold        bool         `json:"sold"`
 }
 
 func GetWorksData() WorksData {
@@ -265,6 +266,49 @@ func GetWorksData() WorksData {
 				Href:        "/works/pictures/b023",
 				Description: "",
 			},
-		},
+			{
+				ID:       "NoName 01",
+				Title:    "NoName 01",
+				Category: "turnables",
+				Images: []WorksImage{
+					{Src: "/static/images/works/turnables/1/IMG_5353.jpg", Alt: "NoName 01"},
+					{Src: "/static/images/works/turnables/1/IMG_5354.jpg", Alt: "NoName 01"},
+					{Src: "/static/images/works/turnables/1/IMG_5355.jpg", Alt: "NoName 01"},
+					{Src: "/static/images/works/turnables/1/IMG_5356.jpg", Alt: "NoName 01"},
+					{Src: "/static/images/works/turnables/1/IMG_5357.jpg", Alt: "NoName 01"},
+					{Src: "/static/images/works/turnables/1/IMG_5358.jpg", Alt: "NoName 01"},
+					{Src: "/static/images/works/turnables/1/IMG_5359.jpg", Alt: "NoName 01"},
+					{Src: "/static/images/works/turnables/1/IMG_5360.jpg", Alt: "NoName 01"},
+					{Src: "/static/images/works/turnables/1/IMG_5361.jpg", Alt: "NoName 01"},
+					{Src: "/static/images/works/turnables/1/IMG_5362.jpg", Alt: "NoName 01"},
+					{Src: "/static/images/works/turnables/1/IMG_5363.jpg", Alt: "NoName 01"},
+					{Src: "/static/images/works/turnables/1/IMG_5364.jpg", Alt: "NoName 01"},
+					{Src: "/static/images/works/turnables/1/IMG_5365.jpg", Alt: "NoName 01"},
+				},
+				Href:        "/works/turnables/noname01",
+				Description: "\"NoName 01\" - 1990\nRotation loop area 1,70m",
+				Sold:        true,
+			},
+			{
+				ID:       "NoName 02",
+				Title:    "NoName 02",
+				Category: "turnables",
+				Images: []WorksImage{
+					{Src: "/static/images/works/turnables/2/IMG_5366.jpg", Alt: "NoName 02"},
+					{Src: "/static/images/works/turnables/2/IMG_5367.jpg", Alt: "NoName 02"},
+					{Src: "/static/images/works/turnables/2/IMG_5368.jpg", Alt: "NoName 02"},
+					{Src: "/static/images/works/turnables/2/IMG_5369.jpg", Alt: "NoName 02"},
+					{Src: "/static/images/works/turnables/2/IMG_5370.jpg", Alt: "NoName 02"},
+					{Src: "/static/images/works/turnables/2/IMG_5371.jpg", Alt: "NoName 02"},
+					{Src: "/static/images/works/turnables/2/IMG_5372.jpg", Alt: "NoName 02"},
+					{Src: "/static/images/works/turnables/2/IMG_5373.jpg", Alt: "NoName 02"},
+					{Src: "/static/images/works/turnables/2/IMG_5374.jpg", Alt: "NoName 02"},
+					{Src: "/static/images/works/turnables/2/IMG_5375.jpg", Alt: "NoName 02"},
+					{Src: "/static/images/works/turnables/2/IMG_5376.jpg", Alt: "NoName 02"},
+				},
+				Href:        "/works/turnables/noname02",
+				Description: "\"NoName 02\" - 1990\nRotation loop area 2,60m\nFrame 1,54m x 1,57m",
+				Sold:        false,
+			}},
 	}
 }
