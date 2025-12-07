@@ -87,13 +87,13 @@ templ WorksPage(data model.WorksData) {
 			    }"
 					>
 						<button
-							class="block"
+							class="block shadow-sm p-4 shadow-[#8792AD] hover:shadow-xl transition-all duration-300 ease-in-out border-4 border-[#E0D9CC]"
 							@click={ "openModal($el.dataset.work)" }
 							data-work={ toJSON(works) }
 						>
 							<div class="relative w-full h-96">
 								for i, image := range works.Images {
-									<img x-show={ "currentIndex === " + strconv.Itoa(i) } class="absolute inset-0 object-contain w-full h-full border-4 border-[#C9D0DF] shadow-sm p-2 shadow-[#8792AD] hover:shadow-xl transition-all duration-300 ease-in-out" src={ image.Src } alt={ image.Alt }/>
+									<img x-show={ "currentIndex === " + strconv.Itoa(i) } class="absolute inset-0 object-contain w-full h-full" src={ image.Src } alt={ image.Alt }/>
 								}
 							</div>
 							<p class="text-center px-4 mt-2 uppercase">{ works.Title }</p>
