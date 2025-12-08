@@ -31,14 +31,14 @@
           vendorHash = "sha256-pcipMz5byZ55EoQUjOMc10nqhFtUh7Agcn599uSQ7Ys=";
 
           # Disable CGO for static binary
-          CGO_ENABLED = "0";
+          env.CGO_ENABLED = "0";
 
           # Static linking flags
-          ldflags = [
-            "-s"
-            "-w"
-            "-extldflags -static"
-          ];
+          # ldflags = [
+          #   "-s"
+          #   "-w"
+          #   "-extldflags -static"
+          # ];
 
           preBuild = ''
             ${templ-cli}/bin/templ generate
