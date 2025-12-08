@@ -35,10 +35,18 @@
           (templ system)
           air
           bun
+          fswatch
+          montserrat
+          zsh
+          flyctl
+          # gopls
+          # delve
+          # tailwindcss-language-server
         ];
 
         shellHook = ''
           make help
+          exec zsh
         '';
       }
     );

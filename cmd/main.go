@@ -21,16 +21,17 @@ func main() {
 	http.HandleFunc("/exhibitions", exhibitionsHandler)
 	http.HandleFunc("/exhibitions/{id}", exhibitionDetailHandler)
 	http.HandleFunc("/works", worksHandler)
-	http.HandleFunc("/works/{id}", workDetailHandler)
-	http.HandleFunc("/about", aboutHandler)
+	http.HandleFunc("/works/{category}/{id}", workDetailHandler)
+	// http.HandleFunc("/about", aboutHandler)
 	http.HandleFunc("/contact", contactHandler)
+	// http.HandleFunc("/modal", modalHandler)
 
 	fmt.Println("Listening on :3000")
 	http.ListenAndServe(":3000", nil)
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	homePage := pages.HomePage()
+	homePage := pages.HomePage(model.GetHomeData())
 	html := layouts.BaseLayout(homePage)
 	html.Render(r.Context(), w)
 }
@@ -69,10 +70,26 @@ func worksHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func workDetailHandler(w http.ResponseWriter, r *http.Request) {
-	id := strings.TrimPrefix(r.URL.Path, "/works/")
+	path := strings.TrimPrefix(r.URL.Path, "/works/")
 
 	// Check for invalid ID first
-	if id == "" || id == r.URL.Path {
+	if path == "" || path == r.URL.Path {
+		http.NotFound(w, r)
+		return
+	}
+
+	// Split the path to get category and id
+	parts := strings.Split(path, "/")
+	if len(parts) != 2 {
+		http.NotFound(w, r)
+		return
+	}
+
+	category := parts[0]
+	id := parts[1]
+
+	// Check for empty category or id
+	if category == "" || id == "" {
 		http.NotFound(w, r)
 		return
 	}
@@ -89,11 +106,17 @@ func workDetailHandler(w http.ResponseWriter, r *http.Request) {
 	html.Render(r.Context(), w)
 }
 
-func aboutHandler(w http.ResponseWriter, r *http.Request) {
-	aboutPage := pages.AboutPage()
-	html := layouts.BaseLayout(aboutPage)
-	html.Render(r.Context(), w)
-}
+// func aboutHandler(w http.ResponseWriter, r *http.Request) {
+// 	aboutPage := pages.AboutPage()
+// 	html := layouts.BaseLayout(aboutPage)
+// 	html.Render(r.Context(), w)
+// }
+
+// func modalHandler(w http.ResponseWriter, r *http.Request) {
+// 	modalPage := pages.ExhibitionsModal(model.GetExhibitionsData().Individual[0])
+// 	html := layouts.BaseLayout(modalPage)
+// 	html.Render(r.Context(), w)
+// }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
 	contactPage := pages.ContactPage()

@@ -1,0 +1,35 @@
+package components
+
+templ UpArrow() {
+	<button
+		id="topButton"
+		class="fixed bottom-8 right-8 p-3 bg-[#23434c]/90 text-white rounded-full shadow-lg hover:bg-[#23434c] transition-all duration-300 opacity-0 transform translate-y-10 active:outline-none active:ring-2 active:ring-[#23434c] active:ring-offset-2 active:duration-100"
+		onclick="scrollToTop()"
+		aria-label="Back to top"
+	>
+		<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+		</svg>
+	</button>
+	<script>
+	// Show/hide button based on scroll position
+	window.addEventListener('scroll', function() {
+		const topButton = document.getElementById('topButton');
+		if (window.pageYOffset > 300) {
+			topButton.classList.remove('opacity-0', 'translate-y-10');
+			topButton.classList.add('opacity-100', 'translate-y-0');
+		} else {
+			topButton.classList.remove('opacity-100', 'translate-y-0');
+			topButton.classList.add('opacity-0', 'translate-y-10');
+		}
+	});
+
+	// Smooth scroll to top
+	function scrollToTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	}
+	</script>
+}
