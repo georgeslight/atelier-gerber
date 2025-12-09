@@ -81,3 +81,7 @@ coverage.html
 /static/css/styles.css
 
 build
+
+# Nix
+.result
+result

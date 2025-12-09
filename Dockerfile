@@ -1,44 +1,28 @@
-# Fetch dependencies
-FROM golang:latest AS fetch-stage
-COPY go.mod go.sum ./
-RUN go mod download
+FROM nixos/nix:latest AS builder
 
-# Generate templ files FIRST
-FROM ghcr.io/a-h/templ:latest AS generate-stage
-COPY --chown=65532:65532 . /app
-WORKDIR /app
-RUN ["templ", "generate"]
+RUN nix-channel --update
 
-# Build CSS assets AFTER templ generation
-FROM oven/bun:1.1-slim AS css-stage
 WORKDIR /app
 
-# Copy package files and install dependencies
-COPY package.json bun.lockb* ./
-RUN bun install
+COPY . .
 
-# Copy ALL generated files from previous stage
-COPY --from=generate-stage /app ./
+# Build
+RUN nix --extra-experimental-features "nix-command flakes" --option filter-syscalls false build .#default
 
-# Now Tailwind scans the generated .go files, not just .templ files
-RUN bunx tailwindcss --input ./static/css/input.css --output ./static/css/styles.css --minify
+# Runtime
+FROM debian:bookworm-slim
+RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
 
-# Build Go application
-FROM golang:latest AS build-stage
-COPY --from=fetch-stage /go/pkg /go/pkg
-COPY --from=css-stage /app /app
 WORKDIR /app
-RUN CGO_ENABLED=0 GOOS=linux go build -buildvcs=false -o /app/app ./cmd
 
-# Test
-FROM build-stage AS test-stage
-RUN go test -v ./...
+# Copy built binary
+COPY --from=builder /app/result/ /app/
+# Copy static files (images) from source
+COPY ./static /app/static/
 
-# Deploy
-FROM gcr.io/distroless/base-debian12 AS deploy-stage
-WORKDIR /
-COPY --from=build-stage /app/app /app
-COPY --from=build-stage /app/static /static
+# Render sets PORT environment variable
 EXPOSE 3000
-USER nonroot:nonroot
-ENTRYPOINT ["/app"]
+EXPOSE $PORT
+
+# Run the binary
+CMD ["/app/bin/cmd"]

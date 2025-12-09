@@ -2,7 +2,7 @@ stages:
   - deploy
 
 variables:
-  FLY_API_TOKEN: $FLY_API_TOKEN  # Set in GitLab CI/CD variables
+  FLY_API_TOKEN: $FLY_API_TOKEN
 
 # Deploy to staging from staging branch
 deploy-staging:
