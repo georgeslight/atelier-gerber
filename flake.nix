@@ -1,5 +1,5 @@
 {
-  description = "Atelier Gerber Website";
+  description = "Atelier Gerber Flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
@@ -28,21 +28,13 @@
           version = "1.0.1";
           src = ./.;
 
-          vendorHash = "sha256-pcipMz5byZ55EoQUjOMc10nqhFtUh7Agcn599uSQ7Ys=";
+          vendorHash = "sha256-DC7Z60UOuxFo/jTxJuMG2duSYW211ntD8eq/YubqSIM=";
 
           # Disable CGO for static binary
           env.CGO_ENABLED = "0";
 
-          # Static linking flags
-          # ldflags = [
-          #   "-s"
-          #   "-w"
-          #   "-extldflags -static"
-          # ];
-
           preBuild = ''
             ${templ-cli}/bin/templ generate
-
 
             # Generate Tailwind CSS
             ${pkgs.tailwindcss_4}/bin/tailwindcss \
@@ -66,7 +58,7 @@
             air
             bun
             fswatch
-            nodePackages.tailwindcss
+            tailwindcss_4
             flyctl
           ];
 

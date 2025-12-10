@@ -5,12 +5,13 @@ import (
 	"strings"
 
 	//"github.com/a-h/templ"
-	"kristin-gerber/internal/model"
-	"kristin-gerber/views/layouts"
-	"kristin-gerber/views/pages"
-	"kristin-gerber/views/pages/exhibitions"
-	"kristin-gerber/views/pages/works"
 	"net/http"
+
+	"gitlab.com/ligeros/atelier-gerber/internal/model"
+	"gitlab.com/ligeros/atelier-gerber/views/layouts"
+	"gitlab.com/ligeros/atelier-gerber/views/pages"
+	"gitlab.com/ligeros/atelier-gerber/views/pages/exhibitions"
+	"gitlab.com/ligeros/atelier-gerber/views/pages/works"
 )
 
 func main() {
