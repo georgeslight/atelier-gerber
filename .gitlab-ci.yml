@@ -13,11 +13,11 @@ build:
     - nix-channel --update
   script:
     - nix --extra-experimental-features "nix-command flakes" --option filter-syscalls false build .#default
-    - mkdir -p /artifacts
-    - cp -r result/* /artifacts/
+    - mkdir -p artifacts
+    - cp -r result/* artifacts/
   artifacts:
     paths:
-      - /artifacts/
+      - artifacts/
     expire_in: 3 days
 
 containerize:
@@ -30,7 +30,7 @@ containerize:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - mkdir -p docker-context
-    - cp -r /artifacts/* docker-context/
+    - cp -r artifacts/* docker-context/
     - cp Dockerfile docker-context/
     - cp -r static docker-context/
     - docker build -t $IMAGE_TAG ./docker-context
