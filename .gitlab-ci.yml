@@ -3,6 +3,7 @@ deploy:
   before_script:
     - apt-get update -qq && apt-get install -y curl
     - curl -L https://fly.io/install.sh | sh
+    - export PATH="$HOME/.fly/bin:$PATH"
   script:
     - flyctl deploy
   rules:
