@@ -5,6 +5,8 @@ deploy:
     - curl -L https://fly.io/install.sh | sh
     - export PATH="$HOME/.fly/bin:$PATH"
   script:
-    - flyctl deploy --remote-only
+    - flyctl deploy --remote-only --access-token "$FLY_API_TOKEN"
   rules:
     - if: $CI_COMMIT_BRANCH == "prod"
+  after_script:
+    - echo "Token is set ${FLY_API_TOKEN:+yes}"
