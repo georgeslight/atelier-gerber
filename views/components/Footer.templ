@@ -1,11 +1,13 @@
 package components
 
+import "time"
+
 templ Footer() {
-    <footer class="mt-8 px-4 py-16 md:p-8 lg:p-10 text-center border-y-[2px] border-[#C9D0DF] mx-auto w-[90%]">
-        <div>
-            <span class="max-w-[1500px] text-sm sm:text-center p-4">
-                © 2025 Kristin Gerber. All rights reserved.
-            </span>
-        </div>
-    </footer>
+	<footer class="mt-8 px-4 py-16 md:p-8 lg:p-10 text-center border-y-[2px] border-[#C9D0DF] mx-auto w-[90%]">
+		<div>
+			<span class="max-w-[1500px] text-sm sm:text-center p-4">
+				© { time.Now().Year() } Atelier Gerber. All rights reserved.
+			</span>
+		</div>
+	</footer>
 }
