@@ -5,6 +5,6 @@ deploy:
     - curl -L https://fly.io/install.sh | sh
     - export PATH="$HOME/.fly/bin:$PATH"
   script:
-    - flyctl deploy
+    - flyctl deploy --remote-only
   rules:
     - if: $CI_COMMIT_BRANCH == "prod"
