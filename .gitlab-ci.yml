@@ -1,10 +1,50 @@
+stages:
+  - build
+  - containerize
+  - deploy
+
+variables:
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+
+build:
+  stage: build
+  image: nixos/nix:latest
+  before_script:
+    - nix-channel --update
+  script:
+    - nix --extra-experimental-features "nix-command flakes" --option filter-syscalls false build .#default
+    - mkdir -p /artifacts
+    - cp -r result/* /artifacts/
+  artifacts:
+    paths:
+      - /artifacts/
+    expire_in: 3 days
+
+containerize:
+  stage: containerize
+  image: docker:latest
+  services:
+    - docker:dind
+  needs: [ "build" ]
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - mkdir -p docker-context
+    - cp -r /artifacts/* docker-context/
+    - cp Dockerfile docker-context/
+    - cp -r static docker-context/
+    - docker build -t $IMAGE_TAG ./docker-context
+    - docker push $IMAGE_TAG
+
 deploy:
+  stage: deploy
   image: debian:bookworm-slim
+  needs: [ "containerize" ]
   before_script:
     - apt-get update -qq && apt-get install -y curl
     - curl -L https://fly.io/install.sh | sh
     - export PATH="$HOME/.fly/bin:$PATH"
   script:
-    - flyctl deploy --remote-only
+    - flyctl deploy --image $IMAGE_TAG --remote-only
   rules:
     - if: $CI_COMMIT_BRANCH == "prod"
