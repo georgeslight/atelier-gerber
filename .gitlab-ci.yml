@@ -4,6 +4,7 @@ stages:
   - deploy
 
 variables:
+  # IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
   FLY_IMAGE_TAG: registry.fly.io/atelier-gerber:$CI_COMMIT_SHA
 
 build:
@@ -27,12 +28,15 @@ containerize:
     - docker:dind
   needs: [ "build" ]
   before_script:
-    - fly auth docker
+    # - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - echo "$FLY_API_TOKEN" | docker login registry.fly.io -u x --password-stdin
   script:
     - mkdir -p docker-context
     - cp -r artifacts/* docker-context/
     - cp Dockerfile docker-context/
     - cp -r static docker-context/
+    # - docker build -t $IMAGE_TAG -t $FLY_IMAGE_TAG ./docker-context
+    # - docker push $IMAGE_TAG
     - docker build -t $FLY_IMAGE_TAG ./docker-context
     - docker push $FLY_IMAGE_TAG
 
@@ -46,6 +50,6 @@ deploy:
     - curl -L https://fly.io/install.sh | sh
     - export PATH="$HOME/.fly/bin:$PATH"
   script:
-    - flyctl deploy --app atelier-gerber --image $FLY_IMAGE_TAG
+    - flyctl deploy --app atelier-gerber -i $FLY_IMAGE_TAG
   rules:
     - if: $CI_COMMIT_BRANCH == "prod"
