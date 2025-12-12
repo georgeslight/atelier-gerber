@@ -42,9 +42,12 @@ deploy:
   image: debian:bookworm-slim
   needs: [ "containerize" ]
   before_script:
-    - apt-get update -qq && apt-get install -y curl
+    - apt-get update -qq && apt-get install -y curl docker.io
+    # Fly.io
     - curl -L https://fly.io/install.sh | sh
     - export PATH="$HOME/.fly/bin:$PATH"
+    # Login to GitLab registry
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - echo $IMAGE_TAG
     - flyctl deploy --image $IMAGE_TAG
