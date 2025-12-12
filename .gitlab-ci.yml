@@ -19,6 +19,8 @@ build:
     paths:
       - artifacts/
     expire_in: 3 days
+  rules:
+    - if: $CI_COMMIT_BRANCH == "prod"
 
 containerize:
   stage: containerize
@@ -35,6 +37,8 @@ containerize:
     - cp -r static docker-context/
     - docker build -t $FLY_IMAGE_TAG ./docker-context
     - docker push $FLY_IMAGE_TAG
+  rules:
+    - if: $CI_COMMIT_BRANCH == "prod"
 
 deploy:
   stage: deploy
