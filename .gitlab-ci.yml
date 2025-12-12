@@ -1,10 +1,51 @@
-deploy:
-  image: debian:bookworm-slim
+stages:
+  - build
+  - containerize
+  - deploy
+
+variables:
+  FLY_IMAGE_TAG: registry.fly.io/atelier-gerber:$CI_COMMIT_SHA
+
+build:
+  stage: build
+  image: nixos/nix:latest
   before_script:
-    - apt-get update -qq && apt-get install -y curl
+    - nix-channel --update
+  script:
+    - nix --extra-experimental-features "nix-command flakes" --option filter-syscalls false build .#default
+    - mkdir -p artifacts
+    - cp -r result/* artifacts/
+  artifacts:
+    paths:
+      - artifacts/
+    expire_in: 3 days
+
+containerize:
+  stage: containerize
+  image: docker:latest
+  services:
+    - docker:dind
+  needs: [ "build" ]
+  before_script:
+    - echo "$FLY_API_TOKEN" | docker login registry.fly.io -u x --password-stdin
+  script:
+    - mkdir -p docker-context
+    - cp -r artifacts/* docker-context/
+    - cp Dockerfile docker-context/
+    - cp -r static docker-context/
+    - docker build -t $FLY_IMAGE_TAG ./docker-context
+    - docker push $FLY_IMAGE_TAG
+
+deploy:
+  stage: deploy
+  image: debian:bookworm-slim
+  needs: [ "containerize" ]
+  before_script:
+    - apt-get update -qq && apt-get install -y curl docker.io
+    # Fly.io
     - curl -L https://fly.io/install.sh | sh
     - export PATH="$HOME/.fly/bin:$PATH"
   script:
-    - flyctl deploy --remote-only
+    - flyctl deploy -i $FLY_IMAGE_TAG
   rules:
     - if: $CI_COMMIT_BRANCH == "prod"
