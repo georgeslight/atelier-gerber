@@ -34,6 +34,7 @@ containerize:
     - cp Dockerfile docker-context/
     - cp -r static docker-context/
     - docker build -t $IMAGE_TAG ./docker-context
+    - echo $IMAGE_TAG
     - docker push $IMAGE_TAG
 
 deploy:
@@ -44,8 +45,8 @@ deploy:
     - apt-get update -qq && apt-get install -y curl
     - curl -L https://fly.io/install.sh | sh
     - export PATH="$HOME/.fly/bin:$PATH"
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
+    - echo $IMAGE_TAG
     - flyctl deploy --image $IMAGE_TAG --remote-only
   rules:
     - if: $CI_COMMIT_BRANCH == "prod"
