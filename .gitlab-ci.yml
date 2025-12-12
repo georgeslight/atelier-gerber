@@ -27,7 +27,7 @@ containerize:
     - docker:dind
   needs: [ "build" ]
   before_script:
-    - echo $FLY_API_TOKEN | docker login registry.fly.io -u x --password-stdin
+    - fly auth docker
   script:
     - mkdir -p docker-context
     - cp -r artifacts/* docker-context/
