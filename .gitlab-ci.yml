@@ -51,6 +51,6 @@ deploy:
     - export PATH="$HOME/.fly/bin:$PATH"
     - echo "$FLY_API_TOKEN" | docker login registry.fly.io -u x --password-stdin
   script:
-    - flyctl deploy -i $FLY_IMAGE_TAG
+    - flyctl deploy -i $IMAGE_TAG
   rules:
     - if: $CI_COMMIT_BRANCH == "prod"
