@@ -47,6 +47,6 @@ deploy:
     - export PATH="$HOME/.fly/bin:$PATH"
   script:
     - echo $IMAGE_TAG
-    - flyctl deploy --image $IMAGE_TAG --remote-only
+    - flyctl deploy --image $IMAGE_TAG
   rules:
     - if: $CI_COMMIT_BRANCH == "prod"
