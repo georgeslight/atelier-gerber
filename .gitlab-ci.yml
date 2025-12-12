@@ -47,6 +47,8 @@ deploy:
     - curl -L https://fly.io/install.sh | sh
     - export PATH="$HOME/.fly/bin:$PATH"
     # Login to GitLab registry
+    - echo "Docker Registry URL $DOCKER_REGISTRY_URL"
+    - echo "Docker Registry User $DOCKER_REGISTRY_USER- 
     - echo $DOCKER_REGISTRY_PASSWORD | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin "$DOCKER_REGISTRY_URL"
   script:
     - echo $IMAGE_TAG
