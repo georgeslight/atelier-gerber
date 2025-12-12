@@ -4,7 +4,7 @@ stages:
   - deploy
 
 variables:
-  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  FLY_IMAGE_TAG: registry.fly.io/atelier-gerber:$CI_COMMIT_SHA
 
 build:
   stage: build
@@ -27,15 +27,14 @@ containerize:
     - docker:dind
   needs: [ "build" ]
   before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - echo $FLY_API_TOKEN | docker login -u registry.fly.io -u x --password-stdin
   script:
     - mkdir -p docker-context
     - cp -r artifacts/* docker-context/
     - cp Dockerfile docker-context/
     - cp -r static docker-context/
-    - docker build -t $IMAGE_TAG ./docker-context
-    - echo $IMAGE_TAG
-    - docker push $IMAGE_TAG
+    - docker build -t $FLY_IMAGE_TAG ./docker-context
+    - docker push $FLY_IMAGE_TAG
 
 deploy:
   stage: deploy
@@ -46,12 +45,7 @@ deploy:
     # Fly.io
     - curl -L https://fly.io/install.sh | sh
     - export PATH="$HOME/.fly/bin:$PATH"
-    # Login to GitLab registry
-    - echo "Docker Registry URL $DOCKER_REGISTRY_URL"
-    - echo "Docker Registry User $DOCKER_REGISTRY_USER- 
-    - echo $DOCKER_REGISTRY_PASSWORD | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin "$DOCKER_REGISTRY_URL"
   script:
-    - echo $IMAGE_TAG
-    - flyctl deploy --image $IMAGE_TAG
+    - flyctl deploy --app atelier-gerber --image $FLY_IMAGE_TAG
   rules:
     - if: $CI_COMMIT_BRANCH == "prod"
