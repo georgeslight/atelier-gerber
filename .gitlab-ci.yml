@@ -1,10 +1,19 @@
 stages:
+  - check
   - build
   - containerize
   - deploy
 
 variables:
   FLY_IMAGE_TAG: registry.fly.io/atelier-gerber:$CI_COMMIT_SHA
+
+check:
+  stage: check
+  image: nixos/nix:latest
+  before_script:
+    - nix-channel --update
+  script:
+    - nix --extra-experimental-features "nix-command flakes" flake check
 
 build:
   stage: build
