@@ -174,14 +174,14 @@ templ:
 css:
 	@printf "\n$(CYAN)Generating CSS$(RESET)\n"
 	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
-	@bunx @tailwindcss/cli -i $(STATIC_DIR)/css/input.css -o $(STATIC_DIR)/css/styles.css --minify
+	@tailwindcss -i $(STATIC_DIR)/css/input.css -o $(STATIC_DIR)/css/styles.css --minify
 	@printf "$(CHECK) CSS generated\n"
 
 watch:
 	@printf "\n$(CYAN)Watching for changes$(RESET)\n"
 	@printf "$(DIM)────────────────────────────────────$(RESET)\n"
 	@printf "\n$(CYAN)Rebuilding...$(RESET)\n"
-	@bunx @tailwindcss/cli -i $(STATIC_DIR)/css/input.css -o $(STATIC_DIR)/css/styles.css --watch=always &
+	@tailwindcss -i $(STATIC_DIR)/css/input.css -o $(STATIC_DIR)/css/styles.css --watch=always &
 	@air
 
 clean:
