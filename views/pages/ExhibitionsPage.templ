@@ -2,8 +2,8 @@ package pages
 
 import (
 	"encoding/json"
-	"html/template"
 	"gitlab.com/ligeros/atelier-gerber/internal/model"
+	"html/template"
 )
 
 func toJSON(v interface{}) template.JS {
@@ -99,13 +99,6 @@ templ ExhibitionPage(data model.ExhibitionsData) {
 					<div>
 						// <div x-text="JSON.stringify(currentExhibition)"></div>
 						<!-- Your modal content here -->
-						<div class="pb-6">
-							<button @click="closeModal()">
-								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10 stroke-[1.25] hover:scale-125 transition-transform duration-200">
-									<path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
-								</svg>
-							</button>
-						</div>
 						// <div>
 						// 	<h2 x-text="currentExhibition.title"></h2>
 						// 	<h2 x-text="currentExhibition.location"></h2>
@@ -140,7 +133,7 @@ templ ExhibitionPage(data model.ExhibitionsData) {
 								<!-- Images -->
 								<template x-for="(image, index) in currentExhibition.details.images" :key="index">
 									<div x-show="currentIndex === index" class="flex items-center justify-center w-full">
-										<img :src="image.src" :alt="image.alt" class="h-[333px] sm:h-[550px] md:h-[650px] lg:h-[800px] object-contain"/>
+										<img :src="image.src" :alt="image.alt" class="h-[55vh] sm:h-[65vh] md:h-[75vh] lg:h-[82vh] w-full object-contain"/>
 									</div>
 								</template>
 								<!-- Left Navigation Area - cursor changes to left arrow -->
@@ -165,7 +158,14 @@ templ ExhibitionPage(data model.ExhibitionsData) {
 										></button>
 									</template>
 								</div>
-								<div class="tracking-wide pt-16">
+								<div class="pt-8 pb-6">
+									<button @click="closeModal()">
+										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10 stroke-[1.25] hover:scale-125 transition-transform duration-200">
+											<path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
+										</svg>
+									</button>
+								</div>
+								<div class="tracking-wide">
 									<h2 class="uppercase " x-text="currentExhibition.title"></h2>
 									<h2 x-text="currentExhibition.location"></h2>
 								</div>
