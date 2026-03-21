@@ -9,25 +9,65 @@ templ WorksPage(data model.WorksData) {
 	<div class="flex-1 h-full w-full mt-8">
 		<div
 			class="container mx-auto max-w-[1500px]"
+			data-works={ toJSON(data.WorksData) }
 			x-data="{
-								activeFilter: localStorage.getItem('activeFilter') || 'all',
-                setFilter(filter) {
-                    this.activeFilter = filter;
-                    localStorage.setItem('activeFilter', filter);
-                },
-                showModal: false,
-                currentWork: null,
-                openModal(workData) {
-                    this.currentWork = JSON.parse(workData);
-                    this.showModal = true;
-                    document.body.style.overflow = 'hidden';
-                },
-                closeModal() {
-                    this.showModal = false;
-                    this.currentWork = null;
-                    document.body.style.overflow = 'auto';
-                }
-            }"
+				activeFilter: localStorage.getItem('activeFilter') || 'all',
+				setFilter(filter) {
+					this.activeFilter = filter;
+					localStorage.setItem('activeFilter', filter);
+				},
+				showModal: false,
+				worksData: [],
+				currentWorkIndex: 0,
+				currentImageIndex: 0,
+				intervalId: null,
+				get currentWork() { return this.worksData[this.currentWorkIndex]; },
+				init() {
+					this.worksData = JSON.parse(this.$el.dataset.works);
+				},
+				openModal(index) {
+					this.currentWorkIndex = index;
+					this.currentImageIndex = 0;
+					this.showModal = true;
+					document.body.style.overflow = 'hidden';
+					this.startAutoAdvance();
+				},
+				closeModal() {
+					this.showModal = false;
+					this.stopAutoAdvance();
+					document.body.style.overflow = 'auto';
+				},
+				nextImage() {
+					const total = this.currentWork.image.length;
+					if (this.currentImageIndex < total - 1) {
+						this.currentImageIndex++;
+					} else if (this.currentWorkIndex < this.worksData.length - 1) {
+						this.currentWorkIndex++;
+						this.currentImageIndex = 0;
+					}
+					this.resetTimer();
+				},
+				prevImage() {
+					if (this.currentImageIndex > 0) {
+						this.currentImageIndex--;
+					} else if (this.currentWorkIndex > 0) {
+						this.currentWorkIndex--;
+						this.currentImageIndex = this.currentWork.image.length - 1;
+					}
+					this.resetTimer();
+				},
+				startAutoAdvance() {
+					this.stopAutoAdvance();
+					this.intervalId = setInterval(() => this.nextImage(), 5000);
+				},
+				stopAutoAdvance() {
+					if (this.intervalId) { clearInterval(this.intervalId); this.intervalId = null; }
+				},
+				resetTimer() {
+					this.stopAutoAdvance();
+					this.startAutoAdvance();
+				}
+			}"
 		>
 			<div class="flex justify-left gap-5 sm:gap-12 mb-8 px-8 lg:px-0">
 				<button
@@ -60,40 +100,39 @@ templ WorksPage(data model.WorksData) {
 				</button>
 			</div>
 			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-item-center gap-10 px-8 lg:px-0">
-				for _, works := range data.WorksData {
+				for i, works := range data.WorksData {
 					<div
 						class="col-span-1 flex flex-col hover:text-[#555555]"
 						data-category={ works.Category }
 						data-images-count={ strconv.Itoa(len(works.Images)) }
 						x-show="activeFilter === 'all' || activeFilter === $el.dataset.category"
 						x-data="{
-			        currentIndex: 0,
-			        totalImages: 0,
-			        init() {
-			            this.totalImages = parseInt($el.dataset.imagesCount);
-			            if (this.totalImages > 1) {
-			                this.autoAdvance()
-			            }
-			        },
-			        autoAdvance() {
-			            this.intervalId = setInterval(() => {
-			                if (this.currentIndex < this.totalImages - 1) {
-			                    this.currentIndex++;
-			                } else {
-			                    this.currentIndex = 0;
-			                }
-			            }, 5000);
-			        }
-			    }"
+				        currentIndex: 0,
+				        totalImages: 0,
+				        init() {
+				            this.totalImages = parseInt($el.dataset.imagesCount);
+				            if (this.totalImages > 1) {
+				                this.autoAdvance()
+				            }
+				        },
+				        autoAdvance() {
+				            this.intervalId = setInterval(() => {
+				                if (this.currentIndex < this.totalImages - 1) {
+				                    this.currentIndex++;
+				                } else {
+				                    this.currentIndex = 0;
+				                }
+				            }, 5000);
+				        }
+				    }"
 					>
 						<button
 							class="relative block shadow-sm p-4 shadow-[#8792AD] hover:shadow-xl transition-all duration-300 ease-in-out border-4 border-[#E0D9CC]"
-							@click={ "openModal($el.dataset.work)" }
-							data-work={ toJSON(works) }
+							@click={ "openModal(" + strconv.Itoa(i) + ")" }
 						>
 							<div class="relative w-full h-96">
-								for i, image := range works.Images {
-									<img x-show={ "currentIndex === " + strconv.Itoa(i) } class="absolute inset-0 object-contain w-full h-full" src={ image.Src } alt={ image.Alt }/>
+								for j, image := range works.Images {
+									<img x-show={ "currentIndex === " + strconv.Itoa(j) } class="absolute inset-0 object-contain w-full h-full" src={ image.Src } alt={ image.Alt }/>
 								}
 							</div>
 							<p class="text-center px-4 mt-2 uppercase">{ works.Title }</p>
@@ -132,51 +171,23 @@ templ WorksPage(data model.WorksData) {
 									</svg>
 								</button>
 							</div>
-							// <div>
-							// 	<h2 x-text="currentWork.title"></h2>
-							// </div>
-							<div
-								class="my-8"
-								x-data="{
-                 currentIndex: 0,
-                 totalImages: currentWork.image.length,
-                 intervalId: null,
-                 init() {
-                     if (this.totalImages > 1) {
-                        this.autoAdvance()
-                    }
-                 },
-                 autoAdvance() {
-                    this.intervalId = setInterval(() => {
-                        if (this.currentIndex < this.totalImages - 1) {
-                            this.currentIndex++;
-                        } else {
-                            this.currentIndex = 0;
-                        }
-                    }, 5000);
-                 },
-                 resetTimer() {
-                    if (this.intervalId) { clearInterval(this.intervalId); }
-                    if (this.totalImages > 1) { this.autoAdvance(); }
-                 }
-             }"
-							>
+							<div class="my-8">
 								<div class="relative inline-block w-full">
 									<!-- Images -->
 									<template x-for="(image, index) in currentWork.image" :key="index">
-										<div x-show="currentIndex === index" class="flex items-center justify-center w-full">
+										<div x-show="currentImageIndex === index" class="flex items-center justify-center w-full">
 											<img :src="image.src" :alt="image.alt" class="h-[333px] sm:h-[550px] md:h-[650px] lg:h-[800px] object-contain"/>
 										</div>
 									</template>
-									<!-- Left Navigation Area - cursor changes to left arrow -->
+									<!-- Left Navigation -->
 									<div
 										class="absolute left-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-left-blue.png),_pointer]"
-										@click="currentIndex = currentIndex > 0 ? currentIndex - 1 : totalImages - 1; resetTimer()"
+										@click="prevImage()"
 									></div>
-									<!-- Right Navigation Area - cursor changes to right arrow -->
+									<!-- Right Navigation -->
 									<div
 										class="absolute right-0 top-0 w-1/2 h-full cursor-[url(/static/icons/arrow-right-blue.png),_pointer]"
-										@click="currentIndex = currentIndex < totalImages - 1  ? currentIndex + 1 : 0; resetTimer()"
+										@click="nextImage()"
 									></div>
 								</div>
 								<div>
@@ -184,9 +195,9 @@ templ WorksPage(data model.WorksData) {
 									<div class="flex justify-center mt-4 space-x-2">
 										<template x-for="(image, index) in currentWork.image" :key="index">
 											<button
-												@click="currentIndex = index"
+												@click="currentImageIndex = index; resetTimer()"
 												class="w-2.5 h-2.5 rounded-full focus:outline-none transition-colors"
-												:class="currentIndex === index ? 'bg-[#C9D0DF]' : 'bg-[#C9D0DF]/50'"
+												:class="currentImageIndex === index ? 'bg-[#C9D0DF]' : 'bg-[#C9D0DF]/50'"
 											></button>
 										</template>
 									</div>
