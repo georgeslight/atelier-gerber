@@ -1,7 +1,7 @@
 package components
 
 templ Navbar() {
-    <div x-data="{ currentPage: window.location.pathname, mobileMenuOpen: false }" class="flex items-start w-[90%] mx-auto md:rpy-4 z-90  border-b-[2px] border-[#C9D0DF]">
+    <div x-data="{ currentPage: window.location.pathname, mobileMenuOpen: false }" class="flex items-start md:rpy-4 z-90 border-b-[2px] border-[#C9D0DF]" :class="currentPage === '/' ? 'w-full' : 'w-[90%] mx-auto'">
         <!-- Desktop Navigation -->
         <div id="navbar" class="max-w-[1500px] w-full flex items-center justify-between mx-auto px-8 lg:px-0 mb-8">
             <div id="nav-left" class="flex items-center">
@@ -41,7 +41,7 @@ templ Navbar() {
 
             <!-- Sidebar Navigation -->
             <div class="flex flex-col p-6 space-y-6 uppercase">
-                <a href="/home"
+                <a href="/"
                    @click="mobileMenuOpen = false"
                    class="tracking-wide hover:text-[#555555] py-2 text-lg border-b border-gray-200"
                    :class="{ 'underline': currentPage === '/' }">
