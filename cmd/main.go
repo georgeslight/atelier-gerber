@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"strings"
 
 	//"github.com/a-h/templ"
@@ -65,7 +66,12 @@ func exhibitionDetailHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func worksHandler(w http.ResponseWriter, r *http.Request) {
-	worksPage := pages.WorksPage(model.GetWorksData())
+	data := model.GetWorksData()
+	// Shuffles slice order
+	rand.Shuffle(len(data.WorksData), func(i, j int) {
+		data.WorksData[i], data.WorksData[j] = data.WorksData[j], data.WorksData[i]
+	})
+	worksPage := pages.WorksPage(data)
 	html := layouts.BaseLayout(worksPage)
 	html.Render(r.Context(), w)
 }
