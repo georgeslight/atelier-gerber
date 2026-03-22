@@ -185,6 +185,7 @@ func GetWorksData() WorksData {
 				},
 				Href:        "/works/turnables/jacinta",
 				Description: "\"Jacinta\" rotation loop area    0,76 - 1995",
+				Sold:        false,
 			},
 			{
 				ID:          "b001",
@@ -193,6 +194,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b001.jpg", Alt: ""}},
 				Href:        "/works/pictures/b001",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b002",
@@ -201,6 +203,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b002.jpg", Alt: ""}},
 				Href:        "/works/pictures/b002",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:       "jaiba-coja",
@@ -228,10 +231,11 @@ func GetWorksData() WorksData {
 				},
 				Href:        "/works/turnables/jaiba-coja",
 				Description: "\"Jaiba coja\" rotation loop area    0,68 - 1996",
+				Sold:        false,
 			},
 			{
 				ID: "NoName 18",
-				// Title:    "Jaiba Coja",
+				// Title:    "NoName 18",
 				Category: "turnables",
 				Images: []WorksImage{
 					{Src: "/static/images/works/turnables/18/IMG_5585.jpg", Alt: "NoName 18"},
@@ -246,6 +250,7 @@ func GetWorksData() WorksData {
 				},
 				Href:        "/works/turnables/noname18",
 				Description: "1996 - 1,65m x 3,07m, rotation loop area each 1,65m",
+				Sold:        true,
 			},
 			{
 				ID:          "b003",
@@ -254,6 +259,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b003.jpg", Alt: ""}},
 				Href:        "/works/pictures/b003",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b004",
@@ -262,6 +268,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b004.jpg", Alt: ""}},
 				Href:        "/works/pictures/b004",
 				Description: "",
+				Sold:        false,
 			},
 
 			{
@@ -271,6 +278,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b005.jpg", Alt: ""}},
 				Href:        "/works/pictures/b005",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b006",
@@ -279,6 +287,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b006.jpg", Alt: ""}},
 				Href:        "/works/pictures/b006",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b007",
@@ -287,6 +296,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b007.jpg", Alt: ""}},
 				Href:        "/works/pictures/b007",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b008",
@@ -295,6 +305,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b008.jpg", Alt: ""}},
 				Href:        "/works/pictures/b008",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b009",
@@ -303,6 +314,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b009.jpg", Alt: ""}},
 				Href:        "/works/pictures/b009",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b010",
@@ -311,6 +323,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b010.jpg", Alt: ""}},
 				Href:        "/works/pictures/b010",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b011",
@@ -319,6 +332,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b011.jpg", Alt: ""}},
 				Href:        "/works/pictures/b011",
 				Description: "",
+				Sold:        false,
 			},
 
 			{
@@ -328,6 +342,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b012.jpg", Alt: ""}},
 				Href:        "/works/pictures/b012",
 				Description: "",
+				Sold:        false,
 			},
 
 			{
@@ -337,6 +352,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b013.jpg", Alt: ""}},
 				Href:        "/works/pictures/b013",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b014",
@@ -345,6 +361,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b014.jpg", Alt: ""}},
 				Href:        "/works/pictures/b014",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b015",
@@ -353,6 +370,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b015.jpg", Alt: ""}},
 				Href:        "/works/pictures/b015",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b016",
@@ -361,6 +379,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b016.jpg", Alt: ""}},
 				Href:        "/works/pictures/b016",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b017",
@@ -369,6 +388,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b017.jpg", Alt: ""}},
 				Href:        "/works/pictures/b017",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b018",
@@ -377,6 +397,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b018.jpg", Alt: ""}},
 				Href:        "/works/pictures/b018",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b019",
@@ -385,6 +406,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b019.jpg", Alt: ""}},
 				Href:        "/works/pictures/b019",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b020",
@@ -393,6 +415,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b020.jpg", Alt: ""}},
 				Href:        "/works/pictures/b020",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b021",
@@ -401,6 +424,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b021.jpg", Alt: ""}},
 				Href:        "/works/pictures/b021",
 				Description: "",
+				Sold:        false,
 			},
 			{
 				ID:          "b023",
@@ -409,6 +433,7 @@ func GetWorksData() WorksData {
 				Images:      []WorksImage{{Src: "/static/images/works/pictures/b023.jpg", Alt: ""}},
 				Href:        "/works/pictures/b023",
 				Description: "",
+				Sold:        false,
 			},
 		},
 	}
