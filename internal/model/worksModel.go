@@ -182,7 +182,6 @@ func GetWorksData() WorksData {
 					{Src: "/static/images/works/turnables/kakadu/IMG_5651.jpg", Alt: "Kakadu"},
 					{Src: "/static/images/works/turnables/kakadu/IMG_5652.jpg", Alt: "Kakadu"},
 					{Src: "/static/images/works/turnables/kakadu/IMG_5653.jpg", Alt: "Kakadu"},
-					{Src: "/static/images/works/turnables/kakadu/IMG_5654.jpg", Alt: "Kakadu"},
 				},
 				Href:        "/works/turnables/kakadu",
 				Description: "1990 - Rotation loop area 0,76m",
