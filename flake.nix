@@ -28,7 +28,7 @@
           version = "1.0.1";
           src = ./.;
 
-          vendorHash = "sha256-DC7Z60UOuxFo/jTxJuMG2duSYW211ntD8eq/YubqSIM=";
+          vendorHash = "sha256-ecs48LYOFifUXtEPa+bgwhKyrrAkkSCzQEeyOZkDuIQ=";
 
           # Disable CGO for static binary
           env.CGO_ENABLED = "0";
