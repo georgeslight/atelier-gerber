@@ -1,8 +1,6 @@
 package layouts
 
-import (
-    "gitlab.com/ligeros/atelier-gerber/views/components"
-)
+import "gitlab.com/ligeros/atelier-gerber/views/components"
 
 templ BaseLayout(page templ.Component) {
 	<!DOCTYPE html>
@@ -15,14 +13,19 @@ templ BaseLayout(page templ.Component) {
 			<link rel="stylesheet" href="/static/css/styles.css"/>
 			// AlpineJS
 			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+			// Favicon
+			<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png"/>
+			<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png"/>
+			<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png"/>
+			<link rel="manifest" href="/static/favicon/site.webmanifest"/>
 		</head>
 		<body class="h-full flex flex-col w-full mx-auto pt-8">
-		    @components.Navbar()
-		    <div class="flex-1 w-full">
-                @page
-		    </div>
-            @components.Footer()
-						@components.UpArrow()
+			@components.Navbar()
+			<div class="flex-1 w-full">
+				@page
+			</div>
+			@components.Footer()
+			@components.UpArrow()
 		</body>
 	</html>
 }
